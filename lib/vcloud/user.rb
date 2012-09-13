@@ -1,5 +1,5 @@
 module VCloud
   module User
-    require 'user/link'
+    require 'vcloud/user/link'
   end
 end
