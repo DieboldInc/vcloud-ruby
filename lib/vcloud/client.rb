@@ -5,17 +5,22 @@ module VCloud
     SESSION = 'sessions'
     TOKEN = 'x_vcloud_authorization'.to_sym
       
-    attr_reader :api_version, :url, :user, :org
+    attr_reader :api_version, :url, :user, :org, :token
         
     @links = []
-    @token_header = {}
+    @logged_in = false
         
     def initialize(url, api_version)
       @url = url
       @api_version = api_version
+      @user = ''
+      @org = ''     
+      @token = {}
     end
   
     def login(username, password)
+      return true if @logged_in
+      
       url = @api_version > VCloud::Constants::Version::V0_9 ? @url + SESSION : @url + LOGIN
       
       #TODO: verify_ssl proper for prod
@@ -27,11 +32,13 @@ module VCloud
         :verify_ssl => false,
         :headers => { :accept => VCloud::Constants::ACCEPT_HEADER+';version=#{@api_version}' })
       
-      response = request.execute      
-      parse_session_xml(response.body)
-      @token_header = { TOKEN => response.headers[TOKEN] }
+      response = request.execute
       
+      parse_session_xml(response.body)
+      @token = { TOKEN => response.headers[TOKEN] }      
       @user, @org = username.split('@')
+      @logged_in = true
+            
       return true
     
   
