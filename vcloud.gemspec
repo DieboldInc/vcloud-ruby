@@ -15,4 +15,5 @@ Gem::Specification.new do |gem|
   gem.version       = VCloud::VERSION
   
   gem.add_dependency "rest-client"
+  gem.add_dependency 'xml-simple'
 end
