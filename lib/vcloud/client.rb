@@ -8,7 +8,7 @@ module VCloud
       @url = url
       @api_version = api_version
       
-      @headers =    
+      # @headers =    
     end
   
     def login(username, password)
