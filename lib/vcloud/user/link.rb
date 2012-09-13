@@ -1,5 +1,3 @@
-require 'xmlsimple'
-
 module VCloud
   module User
     class Link
