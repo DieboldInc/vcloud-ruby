@@ -44,7 +44,21 @@ module VCloud
   
     end
   
-    
+    def get_org_refs_by_name()
+      #TODO: update verify ssl for prod
+      request = RestClient.Request.new(
+        :url = @links.select {|l| l.type == VCloud::Constants::ContentType::ORG_LIST}.first,
+        :method = 'get',
+        :verify_ssl => false,
+        :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST}))
+      response = request.execute
+      doc = Nokogiri::XML(response.body)
+      refs = {}
+      doc.xpath('//xmlns:Org').collect do |elem|
+        refs[elem.attr('name')] = elem
+      end
+      refs    
+    end
   
   
     private
