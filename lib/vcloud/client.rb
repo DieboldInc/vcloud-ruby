@@ -46,10 +46,8 @@ module VCloud
   
     def get_org_refs_by_name()
       #TODO: update verify ssl for prod
-      url = @links.select {|l| l.type == VCloud::Constants::ContentType::ORG_LIST}.first
-      puts url
       request = RestClient::Request.new(
-        :url => url,
+        :url => @links.select {|l| l.type == VCloud::Constants::ContentType::ORG_LIST}.first.href,
         :method => 'get',
         :verify_ssl => false,
         :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST}))
