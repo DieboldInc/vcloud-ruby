@@ -34,8 +34,7 @@ module VCloud
       @user, @org = username.split('@')
       return true
     
-    rescue
-      return false      
+  
     end
   
     private
