@@ -16,7 +16,7 @@ module VCloud
     end
   
     def login(username, password)
-      url = @api_version > VCloud::Constants::V0_9 ? @url + SESSION : @url + LOGIN
+      url = @api_version > VCloud::Constants::Version::V0_9 ? @url + SESSION : @url + LOGIN
       
       #TODO: verify_ssl proper for prod
       request = RestClient.new(
