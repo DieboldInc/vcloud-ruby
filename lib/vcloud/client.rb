@@ -49,7 +49,7 @@ module VCloud
     def parse_session_xml(xml)
       @links = []
       doc = Nokogiri::XML(xml)
-      doc.xpath('//xmlns:Link').each { |link| @links << Link.new(link.to_s) }      
+      doc.xpath('//xmlns:Link').each { |link| @links << Link.FromXML(link.to_s) }      
     end
   
   end

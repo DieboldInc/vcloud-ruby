@@ -12,9 +12,9 @@ module VCloud
     def self.FromXML(link)
       doc = XmlSimple.xml_in(link)
       new(
-      rel: doc['rel'], 
-      type: doc['type'], 
-      href: doc['href']) 
+        rel: doc['rel'], 
+        type: doc['type'], 
+        href: doc['href']) 
     end
 
   end
