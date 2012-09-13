@@ -34,7 +34,7 @@ module VCloud
       
       response = request.execute
       
-      parse_session_xml(response.body)
+      parse_session_links(response.body)
       @token = { TOKEN => response.headers[TOKEN] }      
       @user, @org = username.split('@')
       @logged_in = true
@@ -44,9 +44,12 @@ module VCloud
   
     end
   
+    
+  
+  
     private
     
-    def parse_session_xml(xml)
+    def parse_session_links(xml)
       @links = []
       doc = Nokogiri::XML(xml)
       doc.xpath('//xmlns:Link').each { |link| @links << Link.FromXML(link.to_s) }      
