@@ -6,9 +6,8 @@ module VCloud
       V1_5 = '1.5'
       V5_1 = '5.1'
     end    
-    
-    LOGIN_PATH = '/api/login'
-    SESSION_PATH = '/api/sessions'
-    
+
+    ACCEPT_HEADER = 'application/*+xml'
+
   end
 end
