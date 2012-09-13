@@ -1,6 +1,6 @@
 module VCloud
   module User
     require 'vcloud/user/link'
-    require 'vcloud/organization'
+    require 'vcloud/user/organization'
   end
 end
