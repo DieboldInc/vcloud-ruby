@@ -3,6 +3,7 @@
 module VCloud
   require 'restclient'
   require 'xmlsimple'
+  require 'nokogiri'
     
   require 'vcloud/constants'
   require 'vcloud/client'

@@ -1,6 +1,7 @@
 GEM
   specs:
     mime-types (1.19)
+    nokogiri (1.5.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     xml-simple (1.1.1)
@@ -9,5 +10,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  nokogiri (= 1.5.5)
   rest-client (= 1.6.7)
   xml-simple (= 1.1.1)

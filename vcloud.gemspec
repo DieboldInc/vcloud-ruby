@@ -16,4 +16,5 @@ Gem::Specification.new do |gem|
   
   gem.add_dependency "rest-client"
   gem.add_dependency 'xml-simple'
+  gem.add_dependency 'nokogiri'
 end
