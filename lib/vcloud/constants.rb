@@ -13,6 +13,8 @@ module VCloud
       ORG_LIST = 'application/vnd.vmware.vcloud.orgList+xml'
       ORG = 'application/vnd.vmware.vcloud.org+xml'
       VDC = 'application/vnd.vmware.vcloud.vdc+xml'
+      CATALOG = 'application/vnd.vmware.vcloud.catalog+xml'
+      ORG_NETWORK = 'application/vnd.vmware.vcloud.orgNetwork+xml'
     end
     
     module Xpath
