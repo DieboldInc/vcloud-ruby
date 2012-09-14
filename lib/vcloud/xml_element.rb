@@ -1,9 +1,7 @@
 module VCloud
   module XmlElement
     
-    def self.included(base)
-      base.extend(ClassMethods)
-    end
+
     
       private
       
@@ -27,6 +25,7 @@ module VCloud
         elems = doc.xpath(elem_xpath)
         yield(elems)
       end
+    
     
   end
 end
