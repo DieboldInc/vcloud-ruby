@@ -1,10 +1,11 @@
 module VCloud
   class Link
-    attr_reader :rel, :type, :href
+    attr_reader :rel, :type, :name, :href
 
     def initialize(args)
       @rel = args[:rel]
       @type = args[:type]
+      @name = args[:name]
       @href = args[:href]
     end
 
@@ -13,6 +14,7 @@ module VCloud
       new(
         rel: doc['rel'], 
         type: doc['type'], 
+        name: doc['name'],
         href: doc['href']) 
     end
   end
