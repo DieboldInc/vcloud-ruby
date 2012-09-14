@@ -22,5 +22,22 @@ module VCloud
       href: doc['href'])
     end
 
+    def self.FromReference(ref, session=current_session)
+      url = ref.href 
+      puts session.inspect
+
+      #TODO: verify_ssl proper for prod
+      request = RestClient::Request.new(
+        :url => url,
+        :method => 'get',
+        :verify_ssl => false,
+        :headers => session.token.merge({ :accept => VCloud::Constants::ContentType::ORG+';version=#{session.api_version}' })
+      )
+
+      puts request.headers
+
+      response = request.execute      
+      puts response
+    end
   end
 end
