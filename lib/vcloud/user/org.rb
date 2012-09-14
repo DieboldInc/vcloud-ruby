@@ -1,5 +1,5 @@
 module VCloud
-  class Organization
+  class Org
 
     attr_reader :type, :name, :href, :vdcs, :catalogs, :networks
 
