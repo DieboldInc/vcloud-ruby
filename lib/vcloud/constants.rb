@@ -12,6 +12,7 @@ module VCloud
     module ContentType
       ORG_LIST = 'application/vnd.vmware.vcloud.orgList+xml'
       ORG = 'application/vnd.vmware.vcloud.org+xml'
+      VDC = 'application/vnd.vmware.vcloud.vdc+xml'
     end
     
     module Xpath
