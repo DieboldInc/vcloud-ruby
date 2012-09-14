@@ -62,7 +62,7 @@ module VCloud
         :url => get_orglist_link.href,
         :method => 'get',
         :verify_ssl => false,
-        :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST}))
+        :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST+';version=#{@api_version}'}))
       response = request.execute
       response.body
       refs = []
