@@ -1,5 +1,6 @@
 module VCloud
 
+
   class Client
     LOGIN = 'login'
     SESSION = 'sessions'
@@ -18,6 +19,10 @@ module VCloud
       @token = {}
     end
   
+    def set_as_default_session
+      VCloud::Session.set_session(self)
+    end
+      
     def login(username, password)
       return true if @logged_in
       
@@ -45,22 +50,34 @@ module VCloud
     end
   
     def get_org_refs_by_name()
+      refs = {}
+      doc = Nokogiri::XML(get_org_refs)
+      doc.xpath('//xmlns:Org').each { |elem| refs[elem.attr('name')] = elem }
+      refs
+    end
+  
+    def get_org_refs()
       #TODO: update verify ssl for prod
       request = RestClient::Request.new(
-        :url => @links.select {|l| l.type == VCloud::Constants::ContentType::ORG_LIST}.first.href,
+        :url => get_orglist_link.first.href,
         :method => 'get',
         :verify_ssl => false,
         :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST}))
       response = request.execute
-      doc = Nokogiri::XML(response.body)
-      refs = {}
-      doc.xpath('//xmlns:Org').each do |elem|
-        refs[elem.attr('name')] = elem
-      end
-      refs    
+      response.body
     end
   
-  
+    def get_org_from_name(name)
+      orgs = get_org_refs_by_name
+      ref = orgs[name]
+      org = Org.FromReference(ref, self)
+      return org
+    end
+    
+    def get_orglist_link
+      @orglist ||= @links.select {|l| l.type == VCloud::Constants::ContentType::ORG_LIST}.first
+    end
+    
     private
     
     def parse_session_links(xml)
