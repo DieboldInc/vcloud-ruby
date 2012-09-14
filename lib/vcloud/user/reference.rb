@@ -9,10 +9,10 @@ module VCloud
       @id = args[:id]
     end
     
-    def self.FromXML(link)
-      doc = XmlSimple.xml_in(link)
+    def self.FromXML(ref)
+      doc = XmlSimple.xml_in(ref)
       new(        
-        rel: doc['name'], 
+        name: doc['name'], 
         type: doc['type'], 
         href: doc['href'],
         id: doc['id']) 

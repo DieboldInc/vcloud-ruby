@@ -11,6 +11,7 @@ module VCloud
     
     module ContentType
       ORG_LIST = 'application/vnd.vmware.vcloud.orgList+xml'
+      ORG = 'application/vnd.vmware.vcloud.org+xml'
     end
 
   end
