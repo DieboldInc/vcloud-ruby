@@ -6,7 +6,7 @@ module VCloud
   require 'nokogiri'
     
   require 'vcloud/constants'
-  require 'vcloud/xml_element'
+  require 'vcloud/parses_xml'
   require 'vcloud/client'
 
   

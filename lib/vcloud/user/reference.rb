@@ -9,7 +9,7 @@ module VCloud
       @id = args[:id]
     end
     
-    def self.FromXML(xml)
+    def self.from_xml(xml)
       doc = XmlSimple.xml_in(xml)
       new(        
         name: doc['name'], 

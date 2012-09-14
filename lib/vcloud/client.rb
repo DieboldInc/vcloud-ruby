@@ -1,20 +1,16 @@
 module VCloud
-
-
   class Client
-    
-    include XmlElement
-    
-    
+    include ParsesXml
+
     LOGIN = 'login'
     SESSION = 'sessions'
     TOKEN = 'x_vcloud_authorization'.to_sym
-      
+
     attr_reader :api_version, :url, :user, :org, :token
-        
+
     @links = []
     @logged_in = false
-        
+
     def initialize(url, api_version)
       @url = url
       @api_version = api_version
@@ -22,16 +18,16 @@ module VCloud
       @org = ''     
       @token = {}
     end
-  
+
     def set_as_default_session
       VCloud::Session.set_session(self)
     end
-      
+
     def login(username, password)
       return true if @logged_in
-      
+
       url = @api_version > VCloud::Constants::Version::V0_9 ? @url + SESSION : @url + LOGIN
-      
+
       #TODO: verify_ssl proper for prod
       request = RestClient::Request.new(
         :url => url,
@@ -43,7 +39,7 @@ module VCloud
       
       response = request.execute
       
-      parse_session_links(response.body)
+      @links = links_from_xml(response.body)
       @token = { TOKEN => response.headers[TOKEN] }      
       @user, @org = username.split('@')
       @logged_in = true
@@ -67,33 +63,20 @@ module VCloud
         :method => 'get',
         :verify_ssl => false,
         :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST+';version=#{@api_version}'}))
-      response = request.execute
-      response.body
-      refs = []
-      doc = Nokogiri::XML(response.body)
-      doc.xpath('//xmlns:Org').each { |elem| refs << Reference.FromXML(elem.to_s) }
-      refs
+      response = request.execute      
+      references_from_xml(response.body, VCloud::Constants::Xpath::ORG_REFERENCE)
     end
   
     def get_org_from_name(name)
       orgs = get_org_refs_by_name
       ref = orgs[name]
-      org = Org.FromReference(ref, self)
+      org = Org.from_reference(ref, self)
       return org
     end
     
     def get_orglist_link
       @orglist ||= @links.select {|l| l.type == VCloud::Constants::ContentType::ORG_LIST}.first
     end
-    
-    private
-    
-    def parse_session_links(xml)
-      @links = links_from_xml(xml)
-      # @links = []
-      # doc = Nokogiri::XML(xml)
-      # doc.xpath('//xmlns:Link').each { |link| @links << Link.FromXML(link.to_s) }      
-    end
-  
+
   end
 end
