@@ -1,6 +1,5 @@
 module VCloud
   class Link
-
     attr_reader :rel, :type, :href
 
     def initialize(args)
@@ -9,13 +8,12 @@ module VCloud
       @href = args[:href]
     end
 
-    def self.FromXML(link)
-      doc = XmlSimple.xml_in(link)
+    def self.from_xml(xml)
+      doc = XmlSimple.xml_in(xml)
       new(
         rel: doc['rel'], 
         type: doc['type'], 
         href: doc['href']) 
     end
-
   end
 end
