@@ -15,8 +15,8 @@ module VCloud
     end
     
     module Xpath
-      LINK = '//Link'
-      ORG_REFERENCE = '//Org'
+      LINK = '//xmlns:Link'
+      ORG_REFERENCE = '//xmlns:Org'
     end
 
   end
