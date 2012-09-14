@@ -1,5 +1,5 @@
 module VCloud
-  class Reference
+  class Reference    
     attr_reader :name, :type, :href, :id
 
     def initialize(args)
@@ -9,13 +9,13 @@ module VCloud
       @id = args[:id]
     end
     
-    def self.FromXML(ref)
-      doc = XmlSimple.xml_in(ref)
+    def self.FromXML(xml)
+      doc = XmlSimple.xml_in(xml)
       new(        
         name: doc['name'], 
         type: doc['type'], 
         href: doc['href'],
-        id: doc['id']) 
+        id:   doc['id']) 
     end
   end
 end

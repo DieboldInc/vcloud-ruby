@@ -2,6 +2,10 @@ module VCloud
 
 
   class Client
+    
+    include XmlElement
+    
+    
     LOGIN = 'login'
     SESSION = 'sessions'
     TOKEN = 'x_vcloud_authorization'.to_sym
@@ -85,9 +89,10 @@ module VCloud
     private
     
     def parse_session_links(xml)
-      @links = []
-      doc = Nokogiri::XML(xml)
-      doc.xpath('//xmlns:Link').each { |link| @links << Link.FromXML(link.to_s) }      
+      @links = links_from_xml(xml)
+      # @links = []
+      # doc = Nokogiri::XML(xml)
+      # doc.xpath('//xmlns:Link').each { |link| @links << Link.FromXML(link.to_s) }      
     end
   
   end
