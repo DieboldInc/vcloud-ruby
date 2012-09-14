@@ -50,10 +50,10 @@ module VCloud
     end
   
     def get_org_refs_by_name()
-      refs = {}
-      doc = Nokogiri::XML(get_org_refs)
-      doc.xpath('//xmlns:Org').each { |elem| refs[elem.attr('name')] = elem }
-      refs
+      org_refs = get_org_refs
+      refs_by_name = {}
+      org_refs.each { |ref| refs_by_name[ref.name] = ref }
+      refs_by_name
     end
   
     def get_org_refs()
@@ -65,6 +65,10 @@ module VCloud
         :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST}))
       response = request.execute
       response.body
+      refs = []
+      doc = Nokogiri::XML(response.body)
+      doc.xpath('//xmlns:Org').each { |elem| refs << Reference.FromXML(elem) }
+      refs
     end
   
     def get_org_from_name(name)
