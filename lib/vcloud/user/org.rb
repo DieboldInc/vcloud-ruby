@@ -1,5 +1,6 @@
 module VCloud
   class Org
+    include ParsesXml
 
     attr_reader :type, :name, :href, :vdcs, :catalogs, :networks
 
@@ -11,21 +12,11 @@ module VCloud
       @vdcs = []
       @catalogs = []
       @networks = []
-
     end
 
-    def self.FromXML(org_xml)
-      doc = XmlSimple.xml_in(org_xml)
-      new(
-      type: doc['type'], 
-      name: doc['name'], 
-      href: doc['href'])
-    end
-
-    def self.FromReference(ref, session=current_session)
+    def self.from_reference(ref, session=current_session)
       url = ref.href 
-      puts session.inspect
-
+      
       #TODO: verify_ssl proper for prod
       request = RestClient::Request.new(
         :url => url,
@@ -34,10 +25,47 @@ module VCloud
         :headers => session.token.merge({ :accept => VCloud::Constants::ContentType::ORG+';version=#{session.api_version}' })
       )
 
-      puts request.headers
-
       response = request.execute      
-      puts response
+      vdc_links = get_vdc_links(response.body)
+      catalog_links = get_catalog_links(response.body)
+      org_network_links = get_org_network_links(response.body)      
     end
+    
+    def self.get_vdc_links(xml)
+      links = links_from_xml(xml)
+      vdcs = []
+      links.each do |link|
+        if link.type == VCloud::Constants::ContentType::VDC
+          vdcs << link
+        end
+      end
+
+      return vdcs
+    end
+    
+    def self.get_catalog_links(xml)
+      links = links_from_xml(xml)
+      catalogs = []
+      links.each do |link|
+        if link.type == VCloud::Constants::ContentType::CATALOG
+          catalogs << link
+        end
+      end
+
+      return catalogs
+    end
+    
+    def self.get_org_network_links(xml)
+      links = links_from_xml(xml)
+      networks = []
+      links.each do |link|
+        if link.type == VCloud::Constants::ContentType::ORG_NETWORK
+          networks << link
+        end
+      end
+
+      return networks
+    end
+    
   end
 end
