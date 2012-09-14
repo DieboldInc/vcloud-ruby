@@ -1,12 +1,16 @@
 module VCloud
-  class Organization
+  class Org
 
-    attr_reader :type, :name, :href
+    attr_reader :type, :name, :href, :vdcs, :catalogs, :networks
 
     def initialize(args)
       @type = args[:type]
       @name = args[:name]
       @href = args[:href]
+      
+      @vdcs = []
+      @catalogs = []
+      @networks = []
 
     end
 
