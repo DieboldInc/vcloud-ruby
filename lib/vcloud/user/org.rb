@@ -24,7 +24,7 @@ module VCloud
     end
 
     def self.from_reference(ref, session=current_session)
-      obj = Org.new({:href = ref.href})
+      obj = Org.new({:href => ref.href})
       obj.refresh
       obj
     end
