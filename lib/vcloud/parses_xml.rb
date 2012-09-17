@@ -22,15 +22,19 @@ module VCloud
       def parse_ops
         @parse_ops ||= []
       end
+      
+      def parse_xml(xml)
+        doc = Nokogiri::XML(xml)
+        result = {:doc => doc}
+        parse_ops.each do |op|
+          result.merge!(op.call(doc))
+        end
+        result
+      end
     end
 
     def parse_xml(xml)
-      doc = Nokogiri::XML(xml)
-      result = {}
-      self.class.parse_ops.each do |op|
-        result.merge!(op.call(doc))
-      end
-      result
+      self.class.parse_xml(xml)
     end
   end
 end
