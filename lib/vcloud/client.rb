@@ -2,10 +2,8 @@ module VCloud
   class Client
     include ParsesXml
 
-    xml_parsing_rules do
-      has_links
-      has_reference :org, VCloud::Constants::Xpath::ORG_REFERENCE
-    end
+    has_links
+    has_reference :org, VCloud::Constants::Xpath::ORG_REFERENCE
 
     LOGIN = 'login'
     SESSION = 'sessions'
