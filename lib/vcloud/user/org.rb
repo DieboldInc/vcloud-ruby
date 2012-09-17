@@ -4,8 +4,9 @@ module VCloud
     include RestApi
     
     has_links
-
-    attr_reader :name, :type, :href, :id, :vdcs, :catalogs, :networks, :vdc_links, :catalog_links, :org_network_links
+    has_default_attributes
+    
+    attr_reader :vdcs, :catalogs, :networks, :vdc_links, :catalog_links, :org_network_links
     
     def self.type
       VCloud::Constants::ContentType::ORG
@@ -60,10 +61,6 @@ module VCloud
           org_network_links << link
         end
       end
-            
-      @name = parsed_xml[:doc].root.attr("name")
-      @href = parsed_xml[:doc].root.attr("href")
-      @id = parsed_xml[:doc].root.attr("id")
     end
     
   end
