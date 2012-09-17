@@ -5,7 +5,7 @@ module VCloud
     
     has_links
 
-    attr_reader :type, :name, :href, :id, :vdcs, :catalogs, :networks, :vdc_links, :catalog_links, :org_network_links
+    attr_reader :name, :type, :href, :id, :vdcs, :catalogs, :networks, :vdc_links, :catalog_links, :org_network_links
     
     def self.type
       VCloud::Constants::ContentType::ORG
@@ -23,7 +23,7 @@ module VCloud
       @org_network_links = args[:org_network_links]
     end
 
-    def self.from_reference(ref, session=current_session)
+    def self.from_reference(ref, session = VCloud::Session.current_session)
       obj = Org.new({:href => ref.href})
       obj.refresh
       obj
@@ -50,7 +50,7 @@ module VCloud
       @catalog_links = []
       @org_network_links = []
       
-      parsed_xml[:links].each do |link|
+      @links.each do |link|
         case link.type
         when VCloud::Constants::ContentType::VDC
           vdc_links << link
@@ -61,9 +61,9 @@ module VCloud
         end
       end
             
-      @name = parsed_xml[:doc].children.first["name"]
-      @href = parsed_xml[:doc].children.first["href"]
-      @id = parsed_xml[:doc].children.first["id"]
+      @name = parsed_xml[:doc].root.attr("name")
+      @href = parsed_xml[:doc].root.attr("href")
+      @id = parsed_xml[:doc].root.attr("id")
     end
     
   end

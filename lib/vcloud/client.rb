@@ -3,13 +3,13 @@ module VCloud
     include ParsesXml
 
     has_links
-    has_reference :org, VCloud::Constants::Xpath::ORG_REFERENCE
+    has_reference :orgs, VCloud::Constants::Xpath::ORG_REFERENCE
 
     LOGIN = 'login'
     SESSION = 'sessions'
     TOKEN = 'x_vcloud_authorization'.to_sym
 
-    attr_reader :api_version, :url, :user, :org, :token
+    attr_reader :api_version, :url, :user, :token
 
     @links = []
     @logged_in = false
@@ -41,7 +41,11 @@ module VCloud
         :headers => { :accept => VCloud::Constants::ACCEPT_HEADER+';version=#{@api_version}' })
       
       response = request.execute
-      @links = parse_xml(response.body)[:links]
+      parse_xml(response.body)
+      
+      puts @links
+      
+      #@links = parse_xml(response.body)[:links]
       @token = { TOKEN => response.headers[TOKEN] }      
       @user, @org = username.split('@')
       @logged_in = true
@@ -64,7 +68,7 @@ module VCloud
         :verify_ssl => false,
         :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST+';version=#{@api_version}'}))
       response = request.execute      
-      parse_xml(response.body)[:org]
+      Client.parse_xml(response.body)[:orgs]
     end
   
     def get_org_from_name(name)
