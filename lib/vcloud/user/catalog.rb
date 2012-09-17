@@ -2,6 +2,10 @@ module VCloud
   class Catalog
     include ParsesXml
 
+    has_links
+    has_reference :catalog, VCloud::Constants::Xpath::CATALOG_REFERENCE
+    has_reference :catalogItem, VCloud::Constants::Xpath::CATALOG_ITEM_REFERENCE
+
     attr_reader :name, :id, :type, :href, :catalog_items
     
     def initialize(args)
@@ -13,7 +17,7 @@ module VCloud
       @catalog_items = []
     end
     
-    def self.from_reference(ref, session=@current_session)
+    def self.from_reference(ref, session=@@current_session)
       url = ref.href 
       
       #TODO: verify_ssl proper for prod
