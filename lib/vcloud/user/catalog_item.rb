@@ -12,7 +12,7 @@ module VCloud
     end
     
     def initialize(args)
-
+      @href = args[:href]
     end
     
     def self.from_reference(ref, session = VCloud::Session.current_session)
