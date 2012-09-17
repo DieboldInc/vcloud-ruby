@@ -43,8 +43,6 @@ module VCloud
       response = request.execute
       parse_xml(response.body)
       
-      puts @links
-      
       #@links = parse_xml(response.body)[:links]
       @token = { TOKEN => response.headers[TOKEN] }      
       @user, @org = username.split('@')
