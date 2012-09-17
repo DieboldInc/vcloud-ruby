@@ -6,7 +6,7 @@ module VCloud
     has_links
     has_default_attributes
     
-    attr_reader :vdcs, :catalogs, :networks, :vdc_links, :catalog_links, :org_network_links
+    attr_reader :vdc_links, :catalog_links, :org_network_links
     
     def self.type
       VCloud::Constants::ContentType::ORG

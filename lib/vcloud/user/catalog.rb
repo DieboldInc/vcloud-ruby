@@ -2,7 +2,6 @@ module VCloud
   class Catalog
     include ParsesXml
     include RestApi
-    include Session
 
     has_links
     has_reference :catalog_item_references, VCloud::Constants::Xpath::CATALOG_ITEM_REFERENCE
@@ -26,6 +25,19 @@ module VCloud
       obj.refresh    
       obj
     end
-
+    
+    def get_catalog_item_refs_by_name
+      refs_by_name = {}
+      @catalog_item_references.each do |item|
+        refs_by_name[item.name] = item
+      end
+      return refs_by_name
+    end
+    
+    def get_catalog_item_from_name(name)
+      catalog_items = get_catalog_item_refs_by_name
+      item = catalog_items[name]
+      CatalogItem.from_reference(item)
+    end
   end
 end
