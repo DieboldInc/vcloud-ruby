@@ -1,13 +1,16 @@
 module VCloud
   class Org
     include ParsesXml
+    
+    has_links
 
-    attr_reader :type, :name, :href, :vdcs, :catalogs, :networks, :vdc_links, :catalog_links, :org_network_links
+    attr_reader :type, :name, :href, :id, :vdcs, :catalogs, :networks, :vdc_links, :catalog_links, :org_network_links
 
     def initialize(args)
       @type = args[:type]
       @name = args[:name]
       @href = args[:href]
+      @id = args[:id]
       
       @vdc_links = args[:vdc_links]
       @catalog_links = args[:catalog_links]
@@ -26,49 +29,31 @@ module VCloud
       )
 
       response = request.execute
-            
-      vdc_links = get_vdc_links(response.body)      
-      catalog_links = get_catalog_links(response.body)
-      org_network_links = get_org_network_links(response.body)
       
+      vdc_links = []
+      catalog_links = []
+      org_network_links = []
+      
+      parsed_xml = parse_xml(response.body)
+      
+      parsed_xml[:links].each do |link|
+        case link.type
+        when VCloud::Constants::ContentType::VDC
+          vdc_links << link
+        when VCloud::Constants::ContentType::CATALOG
+          catalog_links << link
+        when VCloud::Constants::ContentType::ORG_NETWORK
+          org_network_links << link
+        end
+      end
+      
+      type =  parsed_xml[:doc].children.first["type"]
+      name = parsed_xml[:doc].children.first["name"]
+      href = parsed_xml[:doc].children.first["href"]
+      id = parsed_xml[:doc].children.first["id"]
+                  
       #TODO: Pull this from the XML
-      Org.new({:type => VCloud::Constants::ContentType::ORG, :name => "blah", :href => "dah", :vdc_links => vdc_links, :catalog_links => catalog_links, :org_network_links => org_network_links})     
-    end
-    
-    def self.get_vdc_links(xml)
-      links = links_from_xml(xml)
-      vdcs = []
-      links.each do |link|
-        if link.type == VCloud::Constants::ContentType::VDC
-          vdcs << link
-        end
-      end
-
-      return vdcs
-    end
-    
-    def self.get_catalog_links(xml)
-      links = links_from_xml(xml)
-      catalogs = []
-      links.each do |link|
-        if link.type == VCloud::Constants::ContentType::CATALOG
-          catalogs << link
-        end
-      end
-
-      return catalogs
-    end
-    
-    def self.get_org_network_links(xml)
-      links = links_from_xml(xml)
-      networks = []
-      links.each do |link|
-        if link.type == VCloud::Constants::ContentType::ORG_NETWORK
-          networks << link
-        end
-      end
-
-      return networks
+      Org.new({:type => type, :name => name, :href => href, :id => id, :vdc_links => vdc_links, :catalog_links => catalog_links, :org_network_links => org_network_links})     
     end
     
     def get_catalog_links_by_name()
