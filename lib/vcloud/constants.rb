@@ -15,6 +15,7 @@ module VCloud
       VDC = 'application/vnd.vmware.vcloud.vdc+xml'
       CATALOG = 'application/vnd.vmware.vcloud.catalog+xml'
       ORG_NETWORK = 'application/vnd.vmware.vcloud.orgNetwork+xml'
+      VAPP_TEMPLATE = 'application/vnd.vmware.vcloud.vAppTemplate+xml' 
     end
     
     module Xpath
@@ -22,6 +23,7 @@ module VCloud
       ORG_REFERENCE = '//xmlns:Org'
       CATALOG_REFERENCE = '//xmlns::Catalog'
       CATALOG_ITEM_REFERENCE = '//xmlns:CatalogItem'
+      ENTITY_REFERENCE = '//xmlns::Entity'
     end
 
   end
