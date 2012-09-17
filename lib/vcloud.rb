@@ -7,7 +7,9 @@ module VCloud
     
   require 'vcloud/constants'
   require 'vcloud/parses_xml'
+  require 'vcloud/rest_api'
   require 'vcloud/client'
+
 
   
   require 'vcloud/user'
