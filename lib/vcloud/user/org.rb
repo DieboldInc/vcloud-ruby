@@ -1,13 +1,19 @@
 module VCloud
   class Org
     include ParsesXml
+    include RestApi
     
     has_links
 
     attr_reader :type, :name, :href, :id, :vdcs, :catalogs, :networks, :vdc_links, :catalog_links, :org_network_links
+    
+    def self.type
+      VCloud::Constants::ContentType::ORG
+    end
 
     def initialize(args)
-      @type = args[:type]
+      @type = self.class.type
+      
       @name = args[:name]
       @href = args[:href]
       @id = args[:id]
@@ -18,42 +24,9 @@ module VCloud
     end
 
     def self.from_reference(ref, session=current_session)
-      url = ref.href 
-      
-      #TODO: verify_ssl proper for prod
-      request = RestClient::Request.new(
-        :url => url,
-        :method => 'get',
-        :verify_ssl => false,
-        :headers => session.token.merge({ :accept => VCloud::Constants::ContentType::ORG+';version=#{session.api_version}' })
-      )
-
-      response = request.execute
-      
-      vdc_links = []
-      catalog_links = []
-      org_network_links = []
-      
-      parsed_xml = parse_xml(response.body)
-      
-      parsed_xml[:links].each do |link|
-        case link.type
-        when VCloud::Constants::ContentType::VDC
-          vdc_links << link
-        when VCloud::Constants::ContentType::CATALOG
-          catalog_links << link
-        when VCloud::Constants::ContentType::ORG_NETWORK
-          org_network_links << link
-        end
-      end
-      
-      type =  parsed_xml[:doc].children.first["type"]
-      name = parsed_xml[:doc].children.first["name"]
-      href = parsed_xml[:doc].children.first["href"]
-      id = parsed_xml[:doc].children.first["id"]
-                  
-      #TODO: Pull this from the XML
-      Org.new({:type => type, :name => name, :href => href, :id => id, :vdc_links => vdc_links, :catalog_links => catalog_links, :org_network_links => org_network_links})     
+      obj = Org.new({:href => ref.href})
+      obj.refresh
+      obj
     end
     
     def get_catalog_links_by_name()
@@ -69,5 +42,29 @@ module VCloud
       link = catalogs[name]
       Catalog.from_reference(link)
     end
+    
+    def parse_xml(xml)
+      parsed_xml = super(xml)
+      
+      @vdc_links = []
+      @catalog_links = []
+      @org_network_links = []
+      
+      parsed_xml[:links].each do |link|
+        case link.type
+        when VCloud::Constants::ContentType::VDC
+          vdc_links << link
+        when VCloud::Constants::ContentType::CATALOG
+          catalog_links << link
+        when VCloud::Constants::ContentType::ORG_NETWORK
+          org_network_links << link
+        end
+      end
+            
+      @name = parsed_xml[:doc].children.first["name"]
+      @href = parsed_xml[:doc].children.first["href"]
+      @id = parsed_xml[:doc].children.first["id"]
+    end
+    
   end
 end
