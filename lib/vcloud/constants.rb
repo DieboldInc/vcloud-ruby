@@ -14,6 +14,7 @@ module VCloud
       ORG = 'application/vnd.vmware.vcloud.org+xml'
       VDC = 'application/vnd.vmware.vcloud.vdc+xml'
       CATALOG = 'application/vnd.vmware.vcloud.catalog+xml'
+      CATALOG_ITEM = 'application/vnd.vmware.vcloud.catalogItem+xml'
       ORG_NETWORK = 'application/vnd.vmware.vcloud.orgNetwork+xml'
       VAPP_TEMPLATE = 'application/vnd.vmware.vcloud.vAppTemplate+xml' 
     end
