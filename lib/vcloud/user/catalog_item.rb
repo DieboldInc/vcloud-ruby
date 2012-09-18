@@ -8,7 +8,7 @@ module VCloud
     has_default_attributes
     
     def self.type
-      VCloud::Constants::ContentType::VAPP_TEMPLATE
+      VCloud::Constants::ContentType::CATALOG_ITEM
     end
     
     def initialize(args)
