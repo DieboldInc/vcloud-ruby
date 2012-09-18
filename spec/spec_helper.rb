@@ -1,1 +1,3 @@
-require_relative '../lib/vcloud' 
+require 'webmock/rspec'
+
+require_relative '../lib/vcloud'
