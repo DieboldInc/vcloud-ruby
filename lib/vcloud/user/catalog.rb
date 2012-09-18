@@ -1,31 +1,12 @@
 module VCloud
-  class Catalog
+  class Catalog < BaseVCloudEntity
     include ParsesXml
-    include RestApi
 
+    has_type VCloud::Constants::ContentType::CATALOG
     has_links
     has_reference :catalog_item_references, VCloud::Constants::Xpath::CATALOG_ITEM_REFERENCE
     has_default_attributes
-    
-    def self.type
-      VCloud::Constants::ContentType::CATALOG
-    end
-    
-    def initialize(args)
-      @name = args[:name]
-      @id = args[:id]
-      @type = args[:type]
-      @href = args[:href]
 
-      @catalog_items = []
-    end
-    
-    def self.from_reference(ref, session = VCloud::Session.current_session)
-      obj = new({:href => ref.href})
-      obj.refresh    
-      obj
-    end
-    
     def get_catalog_item_refs_by_name
       refs_by_name = {}
       @catalog_item_references.each do |item|

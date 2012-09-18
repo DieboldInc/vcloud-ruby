@@ -1,34 +1,12 @@
 module VCloud
-  class Org
+  class Org < BaseVCloudEntity
     include ParsesXml
-    include RestApi
     
+    has_type VCloud::Constants::ContentType::ORG
     has_links
     has_default_attributes
     
     attr_reader :vdc_links, :catalog_links, :org_network_links
-    
-    def self.type
-      VCloud::Constants::ContentType::ORG
-    end
-
-    def initialize(args)
-      @type = self.class.type
-      
-      @name = args[:name]
-      @href = args[:href]
-      @id = args[:id]
-      
-      @vdc_links = args[:vdc_links]
-      @catalog_links = args[:catalog_links]
-      @org_network_links = args[:org_network_links]
-    end
-
-    def self.from_reference(ref, session = VCloud::Session.current_session)
-      obj = Org.new({:href => ref.href})
-      obj.refresh
-      obj
-    end
     
     def get_catalog_links_by_name()
       catalog_refs = {}
