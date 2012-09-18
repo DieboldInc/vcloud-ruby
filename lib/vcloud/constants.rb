@@ -24,7 +24,7 @@ module VCloud
       ORG_REFERENCE = '//xmlns:Org'
       CATALOG_REFERENCE = '//xmlns::Catalog'
       CATALOG_ITEM_REFERENCE = '//xmlns:CatalogItem'
-      ENTITY_REFERENCE = '//xmlns::Entity'
+      ENTITY_REFERENCE = '//xmlns:Entity'
     end
 
   end
