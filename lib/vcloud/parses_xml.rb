@@ -51,8 +51,7 @@ module VCloud
               :name => doc.root.attr("name"),
               :type => doc.root.attr("type"),
               :href => doc.root.attr("href"),
-              :id => doc.root.attr("id")
-            }
+              :id => doc.root.attr("id")}
           end
         }
       end
