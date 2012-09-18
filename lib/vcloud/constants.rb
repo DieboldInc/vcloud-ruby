@@ -25,6 +25,7 @@ module VCloud
       CATALOG_REFERENCE = '//xmlns::Catalog'
       CATALOG_ITEM_REFERENCE = '//xmlns:CatalogItem'
       ENTITY_REFERENCE = '//xmlns:Entity'
+      NETWORK_REFERENCE = '//xmlns:Network'
     end
 
   end
