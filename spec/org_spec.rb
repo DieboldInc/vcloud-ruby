@@ -17,6 +17,10 @@ describe VCloud::Org do
             to_return(:status => 200, :body => VCloud::Test::Data::ORG_XML, :headers => {})
     
     org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}))
+    
+    org.vdc_links.should have(1).items
+    org.catalog_links.should have(1).items
+    org.org_network_links.should have(1).items
   end
   
 end
