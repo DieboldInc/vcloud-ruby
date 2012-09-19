@@ -3,13 +3,6 @@ require 'spec_helper'
 include WebMock::API
 
 describe VCloud::Client do
-  before(:all) do
-    @test_session_url = 'https://some.vcloud.com/api/sessions' 
-    @test_api_version = '1.5'
-    
-    @session = VCloud::Client.new('https://some.vcloud.com/api/', '1.5')        
-  end
-  
   before(:each) do
     # Creates a Session Stub    
     stub_request(:post, "https://someuser%40someorg:password@some.vcloud.com/api/sessions").
@@ -23,16 +16,17 @@ describe VCloud::Client do
              to_return(:status => 200, :body => VCloud::Test::Data::ORG_LIST_XML, :headers => {})
   end
   
-  it "creates a session" do             
-    @session.login('someuser@someorg', 'password')
-    VCloud::Session.set_session(@session)
+  it "creates a session" do
+    test_session = VCloud::Client.new(VCloud::Test::Constants::API_URL, VCloud::Test::Constants::API_VERSION)             
+    test_session.login(VCloud::Test::Constants::USERNAME_WITH_ORG, VCloud::Test::Constants::PASSWORD)
+    VCloud::Session.set_session(test_session)
     
-    @session.url.should == "https://some.vcloud.com/api/"
-    @session.api_version.should == "1.5"
-    @session.user.should == "someuser"
-    @session.token.should_not == nil
-    @session.token[:x_vcloud_authorization].should == "abc123xyz"
-    @session.links.should have(4).items
+    test_session.url.should == VCloud::Test::Constants::API_URL
+    test_session.api_version.should == VCloud::Test::Constants::API_VERSION
+    test_session.user.should == VCloud::Test::Constants::USERNAME
+    test_session.token.should_not == nil
+    test_session.token[:x_vcloud_authorization].should == "abc123xyz"
+    test_session.links.should have(4).items
   end
   
   it "retrieves a list of orginizations" do

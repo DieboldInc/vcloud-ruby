@@ -2,6 +2,31 @@ require 'webmock/rspec'
 
 require_relative '../lib/vcloud'
 
+RSpec.configure do |config|
+  config.before(:each) {
+    stub_request(:post, "https://someuser%40someorg:password@some.vcloud.com/api/sessions").
+             with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby'}).
+             to_return(:status => 200, :body => VCloud::Test::Data::SESSION_XML, :headers => {:x_vcloud_authorization => "abc123xyz"})
+             
+             
+    @session = VCloud::Client.new(VCloud::Test::Constants::API_URL, VCloud::Test::Constants::API_VERSION)
+    @session.login(VCloud::Test::Constants::USERNAME_WITH_ORG, VCloud::Test::Constants::PASSWORD)
+    VCloud::Session.set_session(@session)
+  }
+end
+
+module VCloud
+  module Test
+    module Constants
+      API_URL = "https://some.vcloud.com/api/"
+      API_VERSION = "1.5"
+      USERNAME = "someuser"
+      USERNAME_WITH_ORG = "someuser@someorg"
+      PASSWORD = "password"
+    end
+  end
+end
+
 module VCloud
   module Test
     module Data
@@ -31,7 +56,7 @@ module VCloud
       </Org>}
       
       CATALOG_XML = %q{<?xml version="1.0" encoding="UTF-8"?>
-      <Catalog xmlns="http://www.vmware.com/vcloud/v1.5" name="HALP Catalog" id="urn:vcloud:catalog:aaa-bbb-ccc-ddd-eee-fff" type="application/vnd.vmware.vcloud.catalog+xml" href="https://some.vcloud.com/api/catalog/aaa-bbb-ccc-ddd-eee-fff" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://127.0.0.1/api/v1.5/schema/master.xsd">
+      <Catalog xmlns="http://www.vmware.com/vcloud/v1.5" name="SuperCool Catalog" id="urn:vcloud:catalog:aaa-bbb-ccc-ddd-eee-fff" type="application/vnd.vmware.vcloud.catalog+xml" href="https://some.vcloud.com/api/catalog/aaa-bbb-ccc-ddd-eee-fff" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://127.0.0.1/api/v1.5/schema/master.xsd">
           <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml" href="https://some.vcloud.com/api/catalog/aaa-bbb-ccc-ddd-eee-fff/metadata"/>
           <CatalogItems>
               <CatalogItem type="application/vnd.vmware.vcloud.catalogItem+xml" name="Ubuntu 10.04.4 LTS" href="https://some.vcloud.com/api/catalogItem/aaa-bbb-ccc-ddd-eee-fff"/>

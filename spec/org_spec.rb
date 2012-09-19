@@ -18,14 +18,14 @@ describe VCloud::Org do
   end
   
   it "retrieves an orginization" do    
-    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}))
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}), @session)
     org.vdc_links.should have(1).items
     org.catalog_links.should have(1).items
     org.org_network_links.should have(1).items
   end
   
   it "parses VDC links" do
-    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}))
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}), @session)
     vdc_links = org.get_vdc_links_by_name
     
     vdc_links.should have(1).item
@@ -34,7 +34,7 @@ describe VCloud::Org do
   end
   
   it "parses Catalog links" do
-    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}))
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}), @session)
     catalog_links = org.get_catalog_links_by_name
     
     catalog_links.should have(1).item
