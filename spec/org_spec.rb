@@ -33,4 +33,13 @@ describe VCloud::Org do
     vdc_links["SomeVDC"].href.should == "https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff"
   end
   
+  it "parses Catalog links" do
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}))
+    catalog_links = org.get_catalog_links_by_name
+    
+    catalog_links.should have(1).item
+    catalog_links["SuperCool Catalog"].name.should == "SuperCool Catalog"
+    catalog_links["SuperCool Catalog"].href.should == "https://some.vcloud.com/api/catalog/aaa-bbb-ccc-ddd-eee-fff"
+  end
+  
 end
