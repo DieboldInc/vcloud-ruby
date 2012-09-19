@@ -8,6 +8,7 @@ module VCloud
     end    
 
     ACCEPT_HEADER = 'application/*+xml'
+    XML_ENCODING = 'UTF-8'
     
     module ContentType
       ORG_LIST = 'application/vnd.vmware.vcloud.orgList+xml'

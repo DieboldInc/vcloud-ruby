@@ -1,7 +1,7 @@
 module VCloud
   class InstantiateVAppTemplateParams
 
-    attr_accessor :name, :deploy, :power_on, :description, :source, :network_configs, :vapp_template_href
+    attr_accessor :name, :deploy, :power_on, :description, :source, :network_configs
 
     def initialize
       @network_configs = []
@@ -25,7 +25,7 @@ module VCloud
              end
            } 
           }
-          xml.Source(:href => @vapp_template_href)
+          xml.Source(:href => @source)
         }
       end
       builder.to_xml
