@@ -38,7 +38,7 @@ module VCloud
         :user => username,
         :password => password,
         :verify_ssl => false,
-        :headers => { :accept => VCloud::Constants::ACCEPT_HEADER+';version=#{@api_version}' })
+        :headers => { :accept => VCloud::Constants::ACCEPT_HEADER+";version=#{@api_version}" })
       
       response = request.execute
       parse_xml(response.body)
@@ -64,7 +64,7 @@ module VCloud
         :url => get_orglist_link.href,
         :method => 'get',
         :verify_ssl => false,
-        :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST+';version=#{@api_version}'}))
+        :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST+";version=#{@api_version}"}))
       response = request.execute      
       Client.parse_xml(response.body)[:orgs]
     end

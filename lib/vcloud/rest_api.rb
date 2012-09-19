@@ -8,7 +8,7 @@ module VCloud
         :url => @href,
         :method => 'get',
         :verify_ssl => false,
-        :headers => session.token.merge({ :accept => self.class.type+';version=#{session.api_version}' })
+        :headers => session.token.merge({ :accept => self.class.type+";version=#{session.api_version}" })
       )
       response = request.execute
       parse_response(response)
