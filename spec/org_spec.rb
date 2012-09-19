@@ -18,15 +18,24 @@ describe VCloud::Org do
   end
   
   it "retrieves an orginization" do    
-    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}), @session)
+    org_href = "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => org_href}), @session)
+    
+    WebMock.should have_requested(:get, org_href).
+      with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.org+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
+    
     org.vdc_links.should have(1).items
     org.catalog_links.should have(1).items
     org.org_network_links.should have(1).items
   end
   
   it "parses VDC links" do
-    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}), @session)
+    org_href = "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => org_href}), @session)
     vdc_links = org.get_vdc_links_by_name
+    
+    WebMock.should have_requested(:get, org_href).
+      with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.org+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
     
     vdc_links.should have(1).item
     vdc_links["SomeVDC"].name.should == "SomeVDC"
@@ -34,8 +43,12 @@ describe VCloud::Org do
   end
   
   it "parses Catalog links" do
-    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"}), @session)
+    org_href = "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => org_href}), @session)
     catalog_links = org.get_catalog_links_by_name
+    
+    WebMock.should have_requested(:get, org_href).
+      with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.org+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
     
     catalog_links.should have(1).item
     catalog_links["SuperCool Catalog"].name.should == "SuperCool Catalog"

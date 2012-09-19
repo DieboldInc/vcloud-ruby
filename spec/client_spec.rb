@@ -32,6 +32,9 @@ describe VCloud::Client do
   it "retrieves a list of orginizations" do
     org_refs = @session.get_org_refs
    
+    WebMock.should have_requested(:get, "https://some.vcloud.com/api/org/").
+      with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.orgList+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
+   
     org_refs.should have(1).items
     org_refs.first.name.should == "someorg"
     org_refs.first.href.should == "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"
