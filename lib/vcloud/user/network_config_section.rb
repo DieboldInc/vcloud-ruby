@@ -1,22 +1,25 @@
 module VCloud
-  class NetworkConfigSection < BaseVCloudEntity
-    include ParsesXml
+  class NetworkConfigSection
     
-    has_type VCloud::Constants::ContentType::NETWORK_CONFIG_SECTION
-    has_default_attributes
-    has_links
-    
+  
     attr_accessor :configurations
+        
+    def initialize
+      @configurations = []
+    end
   
     def to_xml
       builder = Nokogiri::XML::Builder.new do |xml|
-        xml.NetworkConfigSection {
+        xml.NetworkConfigSection(
+                    :xmlns => VCloud::Constants::NameSpace::V1_5,
+                    'xmlns:ovf' => VCloud::Constants::NameSpace::OVF) {
+          xml['ovf'].Info 'Configuration parameters for logical networks'
           @configurations.each do |config|
             xml << config.to_xml
           end
         }
       end
-      builder.to_xml
+      builder.doc.root.to_xml
     end
   
   end

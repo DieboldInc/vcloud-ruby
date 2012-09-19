@@ -17,7 +17,9 @@ module VCloud
       CATALOG = 'application/vnd.vmware.vcloud.catalog+xml'
       CATALOG_ITEM = 'application/vnd.vmware.vcloud.catalogItem+xml'
       ORG_NETWORK = 'application/vnd.vmware.vcloud.orgNetwork+xml'
-      VAPP_TEMPLATE = 'application/vnd.vmware.vcloud.vAppTemplate+xml' 
+      VAPP_TEMPLATE = 'application/vnd.vmware.vcloud.vAppTemplate+xml'
+      NETWORK_CONFIG_SECTION = 'application/vnd.vmware.vcloud.networkConfigSection+xml'
+      INSTANTIATE_VAPP_TEMPLATE_PARAMS = 'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml'
     end
     
     module Xpath
@@ -28,6 +30,12 @@ module VCloud
       ENTITY_REFERENCE = '//xmlns:Entity'
       NETWORK_REFERENCE = '//xmlns:Network'
     end
+    
+    module NameSpace
+      V1_5 = 'http://www.vmware.com/vcloud/v1.5'
+      OVF = 'http://schemas.dmtf.org/ovf/envelope/1'
+      XSI = 'http://www.w3.org/2001/XMLSchema-instance'
+    end      
 
   end
 end
