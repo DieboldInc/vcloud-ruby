@@ -22,6 +22,20 @@ module VCloud
       Catalog.from_reference(link)
     end
     
+    def get_vdc_links_by_name()
+      refs = {}
+      @vdc_links.each do |link|
+        refs[link.name] = link
+      end
+      refs
+    end
+    
+    def get_vdc_from_name(name)
+      links = get_vdc_links_by_name
+      link = links[name]
+      Vdc.from_reference(link)
+    end
+    
     def parse_xml(xml)
       parsed_xml = super(xml)
       
