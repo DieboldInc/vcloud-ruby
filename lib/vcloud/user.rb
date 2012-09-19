@@ -1,9 +1,5 @@
 module VCloud
-  require 'vcloud/user/link'
-  require 'vcloud/user/org'
-  require 'vcloud/user/reference'
-  require 'vcloud/user/catalog'
-  require 'vcloud/user/catalog_item'
-  require 'vcloud/user/vdc'
-  require 'vcloud/user/instantiate_vapp_template_params'
+  Dir[File.expand_path("../user/*", __FILE__)].each do |file|
+    require file
+  end
 end
