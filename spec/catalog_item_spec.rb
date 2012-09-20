@@ -22,7 +22,7 @@ describe VCloud::CatalogItem do
     catalog_item.links.should have(2).items
   end  
   
-  it "retrieves a catalog item entity reference" do
+  it "parses a catalog item entity reference" do
     catalog_item_href = "https://vcloud.diebold.dev/api/catalogItem/aaa-bbb-ccc-ddd-eee-fff"
     catalog_item = VCloud::CatalogItem.from_reference(VCloud::Reference.new({:href => catalog_item_href}), @session)
     
