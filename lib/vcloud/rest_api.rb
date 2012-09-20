@@ -34,7 +34,7 @@ module VCloud
           :accept => VCloud::Constants::ACCEPT_HEADER+";version=#{session.api_version}",
           :content_type => content_type})
       )
-      #puts request.inspect
+
       request.execute
     end
     
