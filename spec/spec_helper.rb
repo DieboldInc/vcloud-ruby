@@ -258,6 +258,16 @@ module VCloud
           <FenceMode>bridged</FenceMode>
         </Configuration>
       </NetworkConfig>}
+      
+      NETWORK_CONFIG_SECTION_XML = %q{<NetworkConfigSection xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1">
+        <ovf:Info>Configuration parameters for logical networks</ovf:Info>
+        <NetworkConfig networkName="TestVappNetworkConfigNetwork">
+        <Configuration>
+          <ParentNetwork href=""/>
+          <FenceMode>bridged</FenceMode>
+        </Configuration>
+      </NetworkConfig>
+      </NetworkConfigSection>}
     end
   end
 end
