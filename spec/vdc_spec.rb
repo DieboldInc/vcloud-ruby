@@ -60,10 +60,17 @@ describe VCloud::Vdc do
     
     result = vdc.instantiate_vapp_template(vapp_params)
     
+    puts result
+    
     WebMock.should have_requested(:get, vdc_href).
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.vdc+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
     WebMock.should have_requested(:post, instantiate_vapp_template_url).
       with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'732', 'Content-Type'=>'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
+  
+    result.name.should == "SomeVAppTemplateParams"
+    result.deploy.should == true
+    result.power_on.should == false
+    result.description.should == "some descriptive string"
   end
   
 end
