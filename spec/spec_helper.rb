@@ -251,6 +251,13 @@ module VCloud
          <Source
             href="https://some.vcloud.com/api/vAppTemplate/vappTemplate-aaa-bbb-ccc-ddd-eee-fff" />
       </InstantiateVAppTemplateParams>}
+      
+      NETWORK_CONFIG_XML = %q{<NetworkConfig networkName="TestVappNetworkConfigNetwork">
+        <Configuration>
+          <ParentNetwork href=""/>
+          <FenceMode>bridged</FenceMode>
+        </Configuration>
+      </NetworkConfig>}
     end
   end
 end
