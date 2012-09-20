@@ -72,7 +72,7 @@ module VCloud
       </CatalogItem>}
       
       VDC_XML = %q{<?xml version="1.0" encoding="UTF-8"?>
-      <Vdc xmlns="http://www.vmware.com/vcloud/v1.5" status="1" name="EmTech" id="urn:vcloud:vdc:aaa-bbb-ccc-ddd-eee-fff" type="application/vnd.vmware.vcloud.vdc+xml" href="https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://127.0.0.1/api/v1.5/schema/master.xsd">
+      <Vdc xmlns="http://www.vmware.com/vcloud/v1.5" status="1" name="TestVDC" id="urn:vcloud:vdc:aaa-bbb-ccc-ddd-eee-fff" type="application/vnd.vmware.vcloud.vdc+xml" href="https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://127.0.0.1/api/v1.5/schema/master.xsd">
           <Link rel="up" type="application/vnd.vmware.vcloud.org+xml" href="https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"/>
           <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml" href="https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff/metadata"/>
           <Link rel="add" type="application/vnd.vmware.vcloud.uploadVAppTemplateParams+xml" href="https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff/action/uploadVAppTemplate"/>
