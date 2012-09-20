@@ -31,7 +31,7 @@ module VCloud
         :payload => payload,
         :verify_ssl => false,
         :headers => session.token.merge({
-          :accept => VCloud::Constants::ACCEPT_HEADER+';version=#{@api_version}',
+          :accept => VCloud::Constants::ACCEPT_HEADER+";version=#{session.api_version}",
           :content_type => content_type})
       )
       puts request.inspect
