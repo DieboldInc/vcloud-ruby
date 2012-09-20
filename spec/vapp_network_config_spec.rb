@@ -1,11 +1,5 @@
 require 'spec_helper'
 
-#net_config = VCloud::VAppNetworkConfig.new
-#net_config.network_name = network_ref.name
-#net_config.parent_network_ref = network_ref
-#net_config.fence_mode = 'bridged'
-#:network_name, :parent_network_ref, :fence_mode
-
 include WebMock::API
 
 describe VCloud::VAppNetworkConfig do
