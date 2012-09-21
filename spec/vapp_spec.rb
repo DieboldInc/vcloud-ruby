@@ -19,4 +19,8 @@ describe VCloud::VApp do
     vapp.links.should have(6).items
   end
   
+  it "parses tasks" do
+    
+  end
+  
 end
