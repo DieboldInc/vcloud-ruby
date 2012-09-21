@@ -35,7 +35,8 @@ module VCloud
           :content_type => content_type})
       )
 
-      request.execute
+      response = request.execute
+      parse_response(response)
     end
     
     #override to provide custom parsing
