@@ -32,6 +32,10 @@ describe VCloud::VApp do
     vapp.tasks.first.name.should == 'task'
     vapp.tasks.first.id.should == 'urn:vcloud:task:aaa-bbb-ccc-ddd-eee-fff'
     vapp.tasks.first.href.should == 'https://some.vcloud.com/api/task/aaa-bbb-ccc-ddd-eee-fff'
+    
+    vapp.tasks.first.links.should have(1).item
+    vapp.tasks.first.links.first.rel.should == 'task:cancel'
+    vapp.tasks.first.links.first.href.should == 'https://some.vcloud.com/api/task/aaa-bbb-ccc-ddd-eee-fff/action/cancel'
   end
   
 end
