@@ -66,7 +66,8 @@ describe VCloud::Vdc do
     WebMock.should have_requested(:post, instantiate_vapp_template_url).
       with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'732', 'Content-Type'=>'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
   
-    result.should == vapp_href
+    result.name.should == 'Linux FTP server'
+    result.href.should == vapp_href
   end
   
 end
