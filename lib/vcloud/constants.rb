@@ -25,6 +25,7 @@ module VCloud
     
     module Xpath
       LINK = '//xmlns:Link'
+      TASK = '//xmlns:Task'
       ORG_REFERENCE = '//xmlns:Org'
       CATALOG_REFERENCE = '//xmlns::Catalog'
       CATALOG_ITEM_REFERENCE = '//xmlns:CatalogItem'

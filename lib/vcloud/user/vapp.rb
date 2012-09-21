@@ -5,6 +5,7 @@ module VCloud
     has_type VCloud::Constants::ContentType::VAPP
     has_links
     has_default_attributes
+    has_tasks
     
   end
 end
