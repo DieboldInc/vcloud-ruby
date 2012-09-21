@@ -205,7 +205,7 @@ module VCloud
       
       VAPP_XML = %q{<?xml version="1.0" encoding="UTF-8"?>
       <VApp xmlns="http://www.vmware.com/vcloud/v1.5" deployed="false" status="0" name="Linux FTP server" id="urn:vcloud:vapp:aaa-bbb-ccc-ddd-eee-fff" type="application/vnd.vmware.vcloud.vApp+xml" href="https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://127.0.0.1/api/v1.5/schema/master.xsd">
-          <Link rel="down" type="application/vnd.vmware.vcloud.vAppNetwork+xml" name="Dev CLAN" href="https://some.vcloud.com/api/network/aaa-bbb-ccc-ddd-eee-fff"/>
+          <Link rel="down" type="application/vnd.vmware.vcloud.vAppNetwork+xml" name="Dev VLAN" href="https://some.vcloud.com/api/network/aaa-bbb-ccc-ddd-eee-fff"/>
           <Link rel="down" type="application/vnd.vmware.vcloud.controlAccess+xml" href="https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff/controlAccess/"/>
           <Link rel="up" type="application/vnd.vmware.vcloud.vdc+xml" href="https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff"/>
           <Link rel="down" type="application/vnd.vmware.vcloud.owner+xml" href="https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff/owner"/>
