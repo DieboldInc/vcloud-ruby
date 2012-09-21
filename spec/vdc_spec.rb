@@ -41,6 +41,7 @@ describe VCloud::Vdc do
   
   it "instantiates a vapp template" do
     vdc_href = "https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff"
+    vapp_href = "https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff"
     instantiate_vapp_template_url = "https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff/action/instantiateVAppTemplate"
     
     vdc = VCloud::Vdc.from_reference(VCloud::Reference.new({:href => vdc_href}), @session)
@@ -65,7 +66,7 @@ describe VCloud::Vdc do
     WebMock.should have_requested(:post, instantiate_vapp_template_url).
       with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'732', 'Content-Type'=>'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
   
-    result.should == "https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff"
+    result.should == vapp_href
   end
   
 end
