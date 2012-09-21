@@ -12,7 +12,7 @@ describe VCloud::Vdc do
     
     stub_request(:post, "https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff/action/instantiateVAppTemplate").
              with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'732', 'Content-Type'=>'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'}).
-             to_return(:status => 200, :body => VCloud::Test::Data::INSTANTIATE_VAPP_TEMPLATE_PARAMS, :headers => {})
+             to_return(:status => 200, :body => VCloud::Test::Data::VAPP_XML, :headers => {})
   end
   
   it "retrieves a VDC" do
