@@ -55,6 +55,21 @@ module VCloud
           end
         }
       end
+      
+      def has_tasks
+        self.class_eval do
+          attr_reader :tasks
+        end
+        
+        parse_ops << lambda { |doc, instance = nil|          
+              tasks = doc.xpath(VCloud::Constants::Xpath::TASK).collect { |e| Task.from_xml(e.to_s) }
+              if instance
+                instance.instance_variable_set(:@tasks, tasks)
+              else
+                return {:tasks => tasks}
+              end 
+            }
+      end
 
       def parse_ops
         @parse_ops ||= []
