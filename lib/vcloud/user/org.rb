@@ -3,6 +3,7 @@ module VCloud
     include ParsesXml
     
     has_type VCloud::Constants::ContentType::ORG
+    tag 'Org'
     has_links
     has_default_attributes
     
