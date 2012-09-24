@@ -1,19 +1,16 @@
 module VCloud
-  class Task
+  class Task < BaseVCloudEntity
+    include ParsesXml
     
-    attr_reader :status, :start_time, :operation_name, :operation, :expiry_time, :name, :id, :href, :links
-
-    def initialize(args)
-      @status = args[:status]
-      @start_time = args[:start_time]
-      @operation_name = args[:operation_name]
-      @operation = args[:operation]
-      @expiry_time = args[:expiry_time]
-      @name = args[:name]
-      @id = args[:id]
-      @href = args[:href]
-      @links = args[:links]
-    end
+    has_type VCloud::Constants::ContentType::TASK
+    tag 'Task'
+    has_links
+    has_default_attributes
+    attribute :status, String
+    attribute :start_time, String, :tag => 'startTime' 
+    attribute :operation_name, String, :tag => 'operationName'
+    attribute :operation, String
+    attribute :expiry_time, String, :tag => 'expiryTime'
 
     def self.from_xml(xml)
       doc = XmlSimple.xml_in(xml)

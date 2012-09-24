@@ -21,6 +21,7 @@ module VCloud
       NETWORK_CONFIG_SECTION = 'application/vnd.vmware.vcloud.networkConfigSection+xml'
       INSTANTIATE_VAPP_TEMPLATE_PARAMS = 'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml'
       VAPP = 'application/vnd.vmware.vcloud.vApp+xml'
+      TASK = 'application/vnd.vmware.vcloud.task+xml'
     end
     
     module Xpath
