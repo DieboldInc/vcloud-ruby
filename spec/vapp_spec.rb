@@ -12,11 +12,11 @@ describe VCloud::VApp do
   
   it "retrieves a VApp" do
     vapp_href = "https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff"
-    vapp = VCloud::VApp.from_reference(VCloud::Reference.new({:href => vapp_href}))
+    vapp = VCloud::VApp.from_reference(VCloud::VAppReference.new({:href => vapp_href}))
 
     vapp.name.should == "Linux FTP server"
     vapp.href.should == vapp_href
-    vapp.links.should have(6).items
+    vapp.links.should have(5).items
   end
   
   it "can be parsed from XML" do
@@ -24,7 +24,7 @@ describe VCloud::VApp do
     
     vapp.name.should == "Linux FTP server"
     vapp.href.should == "https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff"
-    vapp.links.should have(6).items
+    vapp.links.should have(5).items
     
     vapp.tasks.should_not == nil
     vapp.tasks.should have(1).items
@@ -43,7 +43,7 @@ describe VCloud::VApp do
   
   it "parses tasks" do
     vapp_href = "https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff"
-    vapp = VCloud::VApp.from_reference(VCloud::Reference.new({:href => vapp_href}))
+    vapp = VCloud::VApp.from_reference(VCloud::VAppReference.new({:href => vapp_href}))
 
     vapp.tasks.should_not == nil
     vapp.tasks.should have(1).items
