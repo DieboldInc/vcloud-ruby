@@ -1,8 +1,14 @@
 module VCloud
   class Link
-    attr_reader :rel, :type, :name, :href
+    include HappyMapper
+    
+    tag 'Link'
+    attribute :rel, 'String'
+    attribute :type, 'String'
+    attribute :name, 'String'
+    attribute :href, 'String'
 
-    def initialize(args)
+    def initialize(args = {})
       @rel = args[:rel]
       @type = args[:type]
       @name = args[:name]
@@ -10,12 +16,8 @@ module VCloud
     end
 
     def self.from_xml(xml)
-      doc = XmlSimple.xml_in(xml)
-      new(
-        rel: doc['rel'], 
-        type: doc['type'], 
-        name: doc['name'],
-        href: doc['href']) 
+      puts "here #{self}"
+      parse(xml)
     end
   end
 end

@@ -5,7 +5,7 @@ module VCloud
     has_type VCloud::Constants::ContentType::VDC
     has_default_attributes
     has_links
-    has_reference :network_references, VCloud::Constants::Xpath::NETWORK_REFERENCE
+    has_many :network_references, NetworkReference, :xpath => '.'
     
     def get_network_refs_by_name
       refs_by_name = {}

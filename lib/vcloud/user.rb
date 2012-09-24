@@ -1,5 +1,11 @@
 module VCloud
-  Dir[File.expand_path("../user/*", __FILE__)].each do |file|
+  require 'vcloud/user/base_reference'
+  
+  Dir[File.expand_path("../user/references/*.rb", __FILE__)].each do |file|
+    require file
+  end
+  
+  Dir[File.expand_path("../user/*.rb", __FILE__)].each do |file|
     require file
   end
 end
