@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem 'rest-client', '1.6.7'
-gem 'nokogiri-happymapper', :git => 'git://github.com/DieboldInc/happymapper.git', :branch => 'instance-parse'
+gem 'nokogiri-happymapper', '0.5.3'
 
 gem 'rake', '0.9.2.2', :group => [:development, :test]
 
