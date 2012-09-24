@@ -2,8 +2,8 @@ module VCloud
   class Client
     include ParsesXml
 
+    tag 'Session'
     has_links
-    has_reference :orgs, VCloud::Constants::Xpath::ORG_REFERENCE
 
     LOGIN = 'login'
     SESSION = 'sessions'
@@ -42,8 +42,7 @@ module VCloud
       
       response = request.execute
       parse_xml(response.body)
-      
-      #@links = parse_xml(response.body)[:links]
+
       @token = { TOKEN => response.headers[TOKEN] }      
       @user, @org = username.split('@')
       @logged_in = true
@@ -65,8 +64,8 @@ module VCloud
         :method => 'get',
         :verify_ssl => false,
         :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST+";version=#{@api_version}"}))
-      response = request.execute      
-      Client.parse_xml(response.body)[:orgs]
+      response = request.execute     
+      OrgList.parse(response.body).orgs
     end
   
     def get_org_from_name(name)

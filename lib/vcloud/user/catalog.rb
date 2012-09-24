@@ -3,9 +3,10 @@ module VCloud
     include ParsesXml
 
     has_type VCloud::Constants::ContentType::CATALOG
+    tag 'Catalog'
     has_links
-    has_reference :catalog_item_references, VCloud::Constants::Xpath::CATALOG_ITEM_REFERENCE
-    has_default_attributes
+    has_default_attributes  
+    has_many :catalog_item_references, CatalogItemReference
 
     def get_catalog_item_refs_by_name
       refs_by_name = {}

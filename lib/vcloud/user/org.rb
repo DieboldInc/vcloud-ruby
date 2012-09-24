@@ -6,11 +6,21 @@ module VCloud
     has_links
     has_default_attributes
     
-    attr_reader :vdc_links, :catalog_links, :org_network_links
+    def vdc_links
+      @links.select {|l| l.type == VCloud::Constants::ContentType::VDC}
+    end
+
+    def catalog_links
+      @links.select {|l| l.type == VCloud::Constants::ContentType::CATALOG}
+    end
+
+    def org_network_links
+      @links.select {|l| l.type == VCloud::Constants::ContentType::ORG_NETWORK}
+    end
     
     def get_catalog_links_by_name()
       catalog_refs = {}
-      @catalog_links.each do |catalog_link|
+      catalog_links.each do |catalog_link|
         catalog_refs[catalog_link.name] = catalog_link
       end
       catalog_refs
@@ -24,7 +34,7 @@ module VCloud
     
     def get_vdc_links_by_name()
       refs = {}
-      @vdc_links.each do |link|
+      vdc_links.each do |link|
         refs[link.name] = link
       end
       refs
@@ -34,26 +44,6 @@ module VCloud
       links = get_vdc_links_by_name
       link = links[name]
       Vdc.from_reference(link)
-    end
-    
-    def parse_xml(xml)
-      parsed_xml = super(xml)
-      
-      @vdc_links = []
-      @catalog_links = []
-      @org_network_links = []
-      
-      @links.each do |link|
-        case link.type
-        when VCloud::Constants::ContentType::VDC
-          vdc_links << link
-        when VCloud::Constants::ContentType::CATALOG
-          catalog_links << link
-        when VCloud::Constants::ContentType::ORG_NETWORK
-          org_network_links << link
-        end
-      end
-    end
-    
+    end    
   end
 end

@@ -1,13 +1,12 @@
 module VCloud
-  class BaseVCloudEntity
-    require 'set'
+  class BaseVCloudEntity  
     include RestApi
 
     def self.inherited(base)
       base.class_variable_set(:@@initialize_args, Set.new)
     end
             
-    def initialize(params)
+    def initialize(params = {})
       initialize_args.each do |arg|
         self.instance_variable_set("@#{arg}".to_sym, params[arg])
       end

@@ -3,13 +3,9 @@ module VCloud
     include ParsesXml
     
     has_type VCloud::Constants::ContentType::CATALOG_ITEM
-    has_links
-    has_reference :entity_references, VCloud::Constants::Xpath::ENTITY_REFERENCE
+    tag 'CatalogItem'
     has_default_attributes
-    
-    def entity_reference
-      @entity_references.first
-    end
-    
+    has_links
+    has_one :entity_reference, EntityReference
   end
 end
