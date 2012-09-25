@@ -23,7 +23,13 @@ describe VCloud::VAppNetworkConfig do
     net_config.parent_network_ref = VCloud::NetworkReference.new({})
     net_config.fence_mode = "bridged"
     
-    # TODO: Reserialize XML we receive and compare to expected value, not overall XML doc
+    xml = net_config.to_xml
+    doc = Nokogiri::XML(xml)
+  
+    puts xml
+    
+    doc.at_xpath('/xmlns:NetworkConfig')['networkName'].should == "TestVappNetworkConfigNetwork"
+    doc.at_xpath('/xmlns:NetworkConfig/xmlns:Configuration/xmlns:FenceMode').text.should == "bridged"
   end
   
 end
