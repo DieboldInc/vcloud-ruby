@@ -10,6 +10,7 @@ module VCloud
     element :source, SourceReference
     element :is_delete_source, Boolean, :tag => 'IsSourceDelete'
     element :all_eulas_accepted, Boolean, :tag => 'AllEULAsAccepted'
+    register_namespace 'xmlns', 'http://www.vmware.com/vcloud/v1.5'
     
     attr_reader :instantiation_param_items
 
