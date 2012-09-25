@@ -31,13 +31,18 @@ describe VCloud::NetworkConfigSection do
     # net_config = VCloud::VAppNetworkConfig.new
     net_config = VCloud::NetworkConfiguration.new
     net_config.network_name = "TestVappNetworkConfigNetwork"
+    # TODO: Actually make a parent network
     net_config.parent_network = VCloud::ParentNetworkReference.new({})
     net_config.fence_mode = "bridged"
     
     net_section = VCloud::NetworkConfigSection.new
     net_section.network_configurations << net_config
     
-    # TODO: Reserialize XML we receive and compare to expected value, not overall XML doc
+    xml = net_section.to_xml
+    doc = Nokogiri::XML(xml)
+    
+    doc.at_xpath('/xmlns:NetworkConfigSection/xmlns:NetworkConfiguration')['networkName'].should == "TestVappNetworkConfigNetwork"
+    doc.at_xpath('/xmlns:NetworkConfigSection/xmlns:NetworkConfiguration/xmlns:FenceMode').text.should == "bridged"
   end
   
 end
