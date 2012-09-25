@@ -19,7 +19,7 @@ describe VCloud::Org do
   
   it "retrieves an orginization" do    
     org_href = "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"
-    org = VCloud::Org.from_reference(VCloud::OrgReference.new({:href => org_href}), @session)
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => org_href}), @session)
     
     WebMock.should have_requested(:get, org_href).
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.org+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
@@ -37,7 +37,7 @@ describe VCloud::Org do
   
   it "parses VDC links" do
     org_href = "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"
-    org = VCloud::Org.from_reference(VCloud::OrgReference.new({:href => org_href}), @session)
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => org_href}), @session)
     vdc_links = org.get_vdc_links_by_name
     
     WebMock.should have_requested(:get, org_href).
@@ -50,7 +50,7 @@ describe VCloud::Org do
   
   it "parses Catalog links" do
     org_href = "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"
-    org = VCloud::Org.from_reference(VCloud::OrgReference.new({:href => org_href}), @session)
+    org = VCloud::Org.from_reference(VCloud::Reference.new({:href => org_href}), @session)
     catalog_links = org.get_catalog_links_by_name
     
     WebMock.should have_requested(:get, org_href).

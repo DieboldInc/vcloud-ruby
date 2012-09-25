@@ -1,11 +1,12 @@
 module VCloud
-  module BaseReference    
-    def self.included(base)
-      base.attribute :id, 'String'
-      base.attribute :type, 'String'
-      base.attribute :name, 'String'
-      base.attribute :href, 'String'
-    end
+  class Reference
+    include HappyMapper 
+    
+    tag '*'
+    attribute :id, 'String'
+    attribute :type, 'String'
+    attribute :name, 'String'
+    attribute :href, 'String'
 
     def initialize(args = {})
       @rel = args[:id]

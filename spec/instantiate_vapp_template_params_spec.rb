@@ -12,7 +12,7 @@ describe VCloud::InstantiateVAppTemplateParams do
     vapp_params = VCloud::InstantiateVAppTemplateParams.new
     vapp_params.name = 'SomeVAppTemplateParams'
     vapp_params.description = 'some descriptive string'
-    vapp_params.source = VCloud::SourceReference.new({})
+    vapp_params.source = VCloud::Reference.new({})
     
     vapp_params.should_not == nil
     vapp_params.name.should == "SomeVAppTemplateParams"
@@ -27,7 +27,7 @@ describe VCloud::InstantiateVAppTemplateParams do
     vapp_params = VCloud::InstantiateVAppTemplateParams.new
     vapp_params.name = 'SomeVAppTemplateParams'
     vapp_params.description = 'some descriptive string'
-    vapp_params.source = VCloud::SourceReference.new({})
+    vapp_params.source = VCloud::Reference.new({})
     
     xml = vapp_params.to_xml
     doc = Nokogiri::XML(xml)

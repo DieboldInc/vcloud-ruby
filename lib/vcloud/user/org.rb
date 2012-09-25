@@ -20,11 +20,7 @@ module VCloud
     end
     
     def get_catalog_links_by_name()
-      catalog_refs = {}
-      catalog_links.each do |catalog_link|
-        catalog_refs[catalog_link.name] = catalog_link
-      end
-      catalog_refs
+      Hash[catalog_links.collect { |l| [l.name, l] }]
     end
     
     def get_catalog_from_name(name)
@@ -34,12 +30,7 @@ module VCloud
     end
     
     def get_vdc_links_by_name()
-      refs = {}
-      vdc_links.each do |link|
-        refs[link.name] = link
-      end
-      refs
-    end
+      Hash[vdc_links.collect { |l| [l.name, l] }]    end
     
     def get_vdc_from_name(name)
       links = get_vdc_links_by_name
