@@ -5,7 +5,7 @@ module VCloud
     
     def to_xml
       builder = Nokogiri::XML::Builder.new do |xml|
-        xml.NetworkConfig(:networkName => @network_name) {
+        xml.NetworkConfig(:xmlns => "http://www.vmware.com/vcloud/v1.5", :networkName => @network_name) {
           xml.Configuration {
             xml.ParentNetwork(:href => @parent_network_ref.href)
             xml.FenceMode @fence_mode
