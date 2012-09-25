@@ -29,6 +29,11 @@ describe VCloud::InstantiateVAppTemplateParams do
     vapp_params.description = 'some descriptive string'
     vapp_params.source = VCloud::SourceReference.new({})
     
-    # TODO: Reserialize XML we receive and compare to expected value, not overall XML doc
+    xml = vapp_params.to_xml
+    doc = Nokogiri::XML(xml)
+    
+    doc.at_xpath('/xmlns:InstantiateVAppTemplateParams')['name'].should == "SomeVAppTemplateParams"
+    doc.at_xpath('/xmlns:InstantiateVAppTemplateParams')['deploy'].should == "true"
+    doc.at_xpath('/xmlns:InstantiateVAppTemplateParams/xmlns:Description').text.should == "some descriptive string"
   end
 end
