@@ -25,8 +25,6 @@ describe VCloud::VAppNetworkConfig do
     
     xml = net_config.to_xml
     doc = Nokogiri::XML(xml)
-  
-    puts xml
     
     doc.at_xpath('/xmlns:NetworkConfig')['networkName'].should == "TestVappNetworkConfigNetwork"
     doc.at_xpath('/xmlns:NetworkConfig/xmlns:Configuration/xmlns:FenceMode').text.should == "bridged"
