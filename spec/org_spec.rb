@@ -21,9 +21,6 @@ describe VCloud::Org do
     org_href = "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"
     org = VCloud::Org.from_reference(VCloud::OrgReference.new({:href => org_href}), @session)
     
-    puts org.inspect
-    
-    
     WebMock.should have_requested(:get, org_href).
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.org+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
     
