@@ -36,7 +36,8 @@ module VCloud
       )
 
       response = request.execute
-      parse_response(response)
+      return response
+      #parse_response(response)
     end
     
     #override to provide custom parsing

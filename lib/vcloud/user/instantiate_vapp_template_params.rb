@@ -11,6 +11,7 @@ module VCloud
     element :is_delete_source, Boolean, :tag => 'IsSourceDelete'
     element :all_eulas_accepted, Boolean, :tag => 'AllEULAsAccepted'
     
+    attr_reader :instantiation_param_items
 
     def initialize
       @instantiation_param_items = []
