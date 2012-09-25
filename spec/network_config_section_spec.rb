@@ -16,7 +16,7 @@ describe VCloud::NetworkConfigSection do
   it "adds a VAppNetworkConfig" do
     net_config = VCloud::VAppNetworkConfig.new
     net_config.network_name = "TestVappNetworkConfigNetwork"
-    net_config.parent_network_ref = VCloud::NetworkReference.new({})
+    net_config.parent_network_ref = VCloud::Reference.new({})
     net_config.fence_mode = "bridged"
     
     net_section = VCloud::NetworkConfigSection.new
@@ -32,7 +32,7 @@ describe VCloud::NetworkConfigSection do
     net_config = VCloud::NetworkConfiguration.new
     net_config.network_name = "TestVappNetworkConfigNetwork"
     # TODO: Actually make a parent network
-    net_config.parent_network = VCloud::ParentNetworkReference.new({})
+    net_config.parent_network = VCloud::Reference.new({})
     net_config.fence_mode = "bridged"
     
     net_section = VCloud::NetworkConfigSection.new
@@ -40,7 +40,7 @@ describe VCloud::NetworkConfigSection do
     
     xml = net_section.to_xml
     doc = Nokogiri::XML(xml)
-    
+ 
     doc.at_xpath('/xmlns:NetworkConfigSection/xmlns:NetworkConfiguration')['networkName'].should == "TestVappNetworkConfigNetwork"
     doc.at_xpath('/xmlns:NetworkConfigSection/xmlns:NetworkConfiguration/xmlns:FenceMode').text.should == "bridged"
   end

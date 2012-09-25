@@ -1,5 +1,5 @@
 module VCloud
-  require 'vcloud/user/base_reference'
+  require 'vcloud/user/reference'
   
   Dir[File.expand_path("../user/references/*.rb", __FILE__)].each do |file|
     require file

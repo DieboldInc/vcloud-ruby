@@ -17,7 +17,7 @@ describe VCloud::Vdc do
   
   it "retrieves a VDC" do
     vdc_href = "https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff"
-    vdc = VCloud::Vdc.from_reference(VCloud::VdcReference.new({:href => vdc_href}), @session)
+    vdc = VCloud::Vdc.from_reference(VCloud::Reference.new({:href => vdc_href}), @session)
     
     WebMock.should have_requested(:get, vdc_href).
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.vdc+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
@@ -29,7 +29,7 @@ describe VCloud::Vdc do
   
   it "pareses a network references" do
     vdc_href = "https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff"
-    vdc = VCloud::Vdc.from_reference(VCloud::VdcReference.new({:href => vdc_href}), @session)
+    vdc = VCloud::Vdc.from_reference(VCloud::Reference.new({:href => vdc_href}), @session)
     
     WebMock.should have_requested(:get, vdc_href).
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.vdc+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
@@ -44,19 +44,19 @@ describe VCloud::Vdc do
     vapp_href = "https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff"
     instantiate_vapp_template_url = "https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff/action/instantiateVAppTemplate"
     
-    vdc = VCloud::Vdc.from_reference(VCloud::VdcReference.new({:href => vdc_href}), @session)
+    vdc = VCloud::Vdc.from_reference(VCloud::Reference.new({:href => vdc_href}), @session)
     
     net_section = VCloud::NetworkConfigSection.new
     net_config = VCloud::VAppNetworkConfig.new
     net_config.network_name = "TestVappNetworkConfigNetwork"
-    net_config.parent_network_ref = VCloud::NetworkReference.new({})
+    net_config.parent_network_ref = VCloud::Reference.new({})
     net_config.fence_mode = 'bridged'
     net_section.network_configurations << net_config
 
     vapp_params = VCloud::InstantiateVAppTemplateParams.new
     vapp_params.name = 'SomeVAppTemplateParams'
     vapp_params.description = 'some descriptive string'
-    vapp_params.source = VCloud::VAppReference.new({})
+    vapp_params.source = VCloud::Reference.new({})
     vapp_params.instantiation_param_items << net_section
     
     result = vdc.instantiate_vapp_template(vapp_params)

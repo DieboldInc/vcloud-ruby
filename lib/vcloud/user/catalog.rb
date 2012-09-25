@@ -6,7 +6,7 @@ module VCloud
     tag 'Catalog'
     has_links
     has_default_attributes  
-    has_many :catalog_item_references, CatalogItemReference
+    has_many :catalog_item_references, Reference, :tag => "CatalogItem"
 
     def get_catalog_item_refs_by_name
       refs_by_name = {}

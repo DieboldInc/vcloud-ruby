@@ -20,7 +20,7 @@ describe VCloud::VAppNetworkConfig do
   it "seralizes to XML" do
     net_config = VCloud::VAppNetworkConfig.new
     net_config.network_name = "TestVappNetworkConfigNetwork"
-    net_config.parent_network_ref = VCloud::NetworkReference.new({})
+    net_config.parent_network_ref = VCloud::Reference.new({})
     net_config.fence_mode = "bridged"
     
     xml = net_config.to_xml

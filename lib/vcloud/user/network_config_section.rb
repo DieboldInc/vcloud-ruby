@@ -1,7 +1,4 @@
 module VCloud
-  class NetworkConfiguration
-  end
-  
   class NetworkConfigSection
     include ParsesXml
   
@@ -10,7 +7,7 @@ module VCloud
     namespace 'xmlns'
     tag 'NetworkConfigSection'
     element :info, String, :tag => 'Info', :namespace => 'ovf'
-    has_many :network_configurations, NetworkConfiguration
+    has_many :network_configurations, 'NetworkConfiguration'
     
     def initialize
       @info = 'Configuration parameters for logical networks'

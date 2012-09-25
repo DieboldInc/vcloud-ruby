@@ -4,8 +4,10 @@ module VCloud
     
     tag 'NetworkConfiguration'
     attribute :network_name, String, :tag => 'networkName'
-    element :parent_network, ParentNetworkReference, :xpath => 'Configuration/.'
-    element :fence_mode, String, :tag => 'FenceMode', :xpath => 'Configuration/FenceMode'
+    wrap 'Configuration' do
+      element :parent_network, Reference, :tag => 'ParentNetwork'
+      element :fence_mode, String, :tag => 'FenceMode'
+    end
     
     
   end

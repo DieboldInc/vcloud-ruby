@@ -12,7 +12,7 @@ describe VCloud::CatalogItem do
   
   it "retrieves a catalog item" do
     catalog_item_href = "https://vcloud.diebold.dev/api/catalogItem/aaa-bbb-ccc-ddd-eee-fff"
-    catalog_item = VCloud::CatalogItem.from_reference(VCloud::CatalogItemReference.new({:href => catalog_item_href}), @session)
+    catalog_item = VCloud::CatalogItem.from_reference(VCloud::Reference.new({:href => catalog_item_href}), @session)
     
     WebMock.should have_requested(:get, catalog_item_href).
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.catalogItem+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
@@ -24,7 +24,7 @@ describe VCloud::CatalogItem do
   
   it "parses a catalog item entity reference" do
     catalog_item_href = "https://vcloud.diebold.dev/api/catalogItem/aaa-bbb-ccc-ddd-eee-fff"
-    catalog_item = VCloud::CatalogItem.from_reference(VCloud::CatalogItemReference.new({:href => catalog_item_href}), @session)
+    catalog_item = VCloud::CatalogItem.from_reference(VCloud::Reference.new({:href => catalog_item_href}), @session)
     
     WebMock.should have_requested(:get, catalog_item_href).
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.catalogItem+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby', 'X-Vcloud-Authorization'=>'abc123xyz'})
