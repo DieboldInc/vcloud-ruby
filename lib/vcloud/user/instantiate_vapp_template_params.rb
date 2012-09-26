@@ -7,7 +7,7 @@ module VCloud
     attribute :deploy, Boolean
     attribute :power_on, Boolean, :tag => 'powerOn'
     element :description, String, :tag => 'Description'
-    element :source, Reference, :tag => 'Source'
+    element :source, 'VCloud::Reference', :tag => 'Source'
     element :is_delete_source, Boolean, :tag => 'IsSourceDelete'
     element :all_eulas_accepted, Boolean, :tag => 'AllEULAsAccepted'
     register_namespace 'xmlns', 'http://www.vmware.com/vcloud/v1.5'

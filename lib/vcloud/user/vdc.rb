@@ -6,7 +6,7 @@ module VCloud
     tag 'Vdc'
     has_default_attributes
     has_links
-    has_many :network_references, Reference, :tag => 'Network'
+    has_many :network_references, 'VCloud::Reference', :tag => 'Network'
     
     def get_network_refs_by_name      
       Hash[@network_references.collect{ |i| [i.name, i] }]

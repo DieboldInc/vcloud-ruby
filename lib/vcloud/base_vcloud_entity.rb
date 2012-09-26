@@ -4,6 +4,7 @@ module VCloud
 
     def self.inherited(base)
       base.class_variable_set(:@@initialize_args, Set.new)
+      base.send(:include, ParsesXml)
     end
             
     def initialize(params = {})

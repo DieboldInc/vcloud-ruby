@@ -16,7 +16,6 @@ module VCloud
     end
 
     def self.from_xml(xml)
-      puts "here #{self}"
       parse(xml)
     end
   end
