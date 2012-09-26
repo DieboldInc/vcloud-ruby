@@ -8,7 +8,7 @@ module VCloud
     module ClassMethods
       def has_links
         self.class_eval do
-          has_many :links, VCloud::Link, :xpath => '.'
+          has_many :links, 'VCloud::Link', :xpath => '.'
         end
       end
 

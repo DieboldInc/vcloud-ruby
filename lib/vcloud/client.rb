@@ -1,25 +1,25 @@
 module VCloud
-  class Client
-    include ParsesXml
-
+  class Client < BaseVCloudEntity    
+    
     tag 'Session'
     has_links
-
+    attribute :type, String
+    attribute :href, String
+    attribute :user, String
+    attribute :org, String
+    
     LOGIN = 'login'
     SESSION = 'sessions'
     TOKEN = 'x_vcloud_authorization'.to_sym
 
-    attr_reader :api_version, :url, :user, :token
+    attr_reader :api_version, :url, :token
 
-    @links = []
-    @logged_in = false
-
-    def initialize(url, api_version)
+    def initialize(url, api_version) 
+      @links=[]
       @url = url
       @api_version = api_version
-      @user = ''
-      @org = ''     
       @token = {}
+      @logged_in = false
     end
 
     def set_as_default_session
@@ -39,38 +39,26 @@ module VCloud
         :password => password,
         :verify_ssl => false,
         :headers => { :accept => VCloud::Constants::ACCEPT_HEADER+";version=#{@api_version}" })
-      
       response = request.execute
       parse_xml(response.body)
 
       @token = { TOKEN => response.headers[TOKEN] }      
-      @user, @org = username.split('@')
       @logged_in = true
             
       return true
     end
   
     def get_org_refs_by_name()
-      org_refs = get_org_refs
-      refs_by_name = {}
-      org_refs.each { |ref| refs_by_name[ref.name] = ref }
-      refs_by_name
+      Hash[get_org_refs.collect{ |i| [i.name, i] }]
     end
   
     def get_org_refs()
-      #TODO: update verify ssl for prod
-      request = RestClient::Request.new(
-        :url => get_orglist_link.href,
-        :method => 'get',
-        :verify_ssl => false,
-        :headers => @token.merge({:accept => VCloud::Constants::ContentType::ORG_LIST+";version=#{@api_version}"}))
-      response = request.execute     
-      OrgList.parse(response.body).orgs
+      OrgList.from_reference(get_orglist_link).orgs
     end
   
     def get_org_from_name(name)
       orgs = get_org_refs_by_name
-      ref = orgs[name]
+      ref = orgs[name] or return nil
       org = Org.from_reference(ref, self)
       return org
     end
@@ -78,6 +66,9 @@ module VCloud
     def get_orglist_link
       @orglist ||= @links.select {|l| l.type == VCloud::Constants::ContentType::ORG_LIST}.first
     end
-
+    
+    def logged_in?
+      @logged_in
+    end
   end
 end
