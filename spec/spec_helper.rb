@@ -22,16 +22,7 @@ module VCloud
   module Test
     module Data
 
-        
-      CATALOG_XML = %q{<?xml version="1.0" encoding="UTF-8"?>
-      <Catalog xmlns="http://www.vmware.com/vcloud/v1.5" name="SuperCool Catalog" id="urn:vcloud:catalog:aaa-bbb-ccc-ddd-eee-fff" type="application/vnd.vmware.vcloud.catalog+xml" href="https://some.vcloud.com/api/catalog/aaa-bbb-ccc-ddd-eee-fff" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://127.0.0.1/api/v1.5/schema/master.xsd">
-          <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml" href="https://some.vcloud.com/api/catalog/aaa-bbb-ccc-ddd-eee-fff/metadata"/>
-          <CatalogItems>
-              <CatalogItem type="application/vnd.vmware.vcloud.catalogItem+xml" name="Ubuntu 10.04.4 LTS" href="https://some.vcloud.com/api/catalogItem/aaa-bbb-ccc-ddd-eee-fff"/>
-          </CatalogItems>
-          <IsPublished>true</IsPublished>
-      </Catalog>}
-      
+     
       CATALOG_ITEM_XML = %q{<?xml version="1.0" encoding="UTF-8"?>
       <CatalogItem xmlns="http://www.vmware.com/vcloud/v1.5" name="Ubuntu 10.04.4 LTS" id="urn:vcloud:catalogitem:aaa-bbb-ccc-ddd-eee-fff" type="application/vnd.vmware.vcloud.catalogItem+xml" href="https://some.vcloud.com/api/catalogItem/aaa-bbb-ccc-ddd-eee-fff" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://127.0.0.1/api/v1.5/schema/master.xsd">
           <Link rel="up" type="application/vnd.vmware.vcloud.catalog+xml" href="https://some.vcloud.com/api/catalog/aaa-bbb-ccc-ddd-eee-fff"/>
