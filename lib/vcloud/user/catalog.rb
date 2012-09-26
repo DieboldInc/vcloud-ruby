@@ -1,24 +1,22 @@
 module VCloud
   class Catalog < BaseVCloudEntity
-    include ParsesXml
 
     has_type VCloud::Constants::ContentType::CATALOG
     tag 'Catalog'
     has_links
-    has_default_attributes  
-    has_many :catalog_item_references, 'VCloud::Reference', :tag => "CatalogItem"
+    has_default_attributes
+    wrap 'CatalogItems' do
+      has_many :catalog_item_references, 'VCloud::Reference', :tag => "CatalogItem"
+    end
+    element :is_published, Boolean, :tag => 'IsPublished'
 
     def get_catalog_item_refs_by_name
-      refs_by_name = {}
-      @catalog_item_references.each do |item|
-        refs_by_name[item.name] = item
-      end
-      return refs_by_name
+      Hash[catalog_item_references.collect{ |i| [i.name, i] }]
     end
     
     def get_catalog_item_from_name(name)
       catalog_items = get_catalog_item_refs_by_name
-      item = catalog_items[name]
+      item = catalog_items[name] or return nil
       CatalogItem.from_reference(item)
     end
   end
