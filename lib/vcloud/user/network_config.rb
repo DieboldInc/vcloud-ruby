@@ -1,10 +1,10 @@
 module VCloud
-  class NetworkConfiguration
+  class NetworkConfig
     include ParsesXml
-    
-    tag 'NetworkConfiguration'
+
+    tag 'NetworkConfig'
     attribute :network_name, String, :tag => 'networkName'
-    wrap 'Configuration' do
+    wrap 'Configuration' do     
       element :parent_network, 'VCloud::Reference', :tag => 'ParentNetwork'
       element :fence_mode, String, :tag => 'FenceMode'
     end

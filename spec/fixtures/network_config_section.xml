@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NetworkConfigSection xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" type="application/vnd.vmware.vcloud.networkConfigSection+xml" href="https://vcloud.example.dev/api/vAppTemplate/vappTemplate-1/networkConfigSection/" ovf:required="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.dmtf.org/ovf/envelope/1 http://schemas.dmtf.org/ovf/envelope/1/dsp8023_1.1.0.xsd http://www.vmware.com/vcloud/v1.5 http://10.9.225.10/api/v1.5/schema/master.xsd">
+    <ovf:Info>The configuration parameters for logical networks</ovf:Info>
+    <NetworkConfig networkName="none">
+     </NetworkConfig>
+</NetworkConfigSection>
