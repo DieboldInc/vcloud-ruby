@@ -20,7 +20,7 @@ describe VCloud::CatalogItem do
     end
   end
   
-  it 'should retrieve CatalogItem #from_reference'
+  it 'should retrieve CatalogItem #from_reference' do
     stub_request(:get, "https://vcloud.diebold.dev/api/catalogItem/aaa-bbb-ccc-ddd-eee-fff").
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.catalogItem+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'}).
       to_return(:status => 200, :body => VCloud::Test::Data::CATALOG_ITEM_XML)
@@ -31,5 +31,5 @@ describe VCloud::CatalogItem do
         with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.catalogItem+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'})
 
       item.id.should == 'urn:vcloud:catalogitem:aaa-bbb-ccc-ddd-eee-fff'
-    end  
+  end  
 end
