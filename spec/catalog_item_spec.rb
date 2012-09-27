@@ -13,10 +13,10 @@ describe VCloud::CatalogItem do
       @item.id.should == 'urn:vcloud:catalogitem:aaa-bbb-ccc-ddd-eee-fff'
       @item.type.should == 'application/vnd.vmware.vcloud.catalogItem+xml'
       @item.href.should == 'https://some.vcloud.com/api/catalogItem/aaa-bbb-ccc-ddd-eee-fff'
-      @item.link.should have(2).items
+      @item.links.should have(2).items
       @item.entity_reference.name.should == 'Ubuntu 10.04.4 LTS'
       @item.entity_reference.href.should == 'https://some.vcloud.com/api/vAppTemplate/vappTemplate-aaa-bbb-ccc-ddd-eee-fff'
-      @item.entity_reference.type.should == 'application/vnd.vmware.vcloud.vAppTemplate+xm'
+      @item.entity_reference.type.should == 'application/vnd.vmware.vcloud.vAppTemplate+xml'
     end
   end
   
