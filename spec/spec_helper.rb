@@ -102,31 +102,7 @@ module VCloud
           <InMaintenanceMode>false</InMaintenanceMode>
       </VApp>}
       
-      VAPP_TEMPLATE_PARAMS = %q{<?xml version="1.0" encoding="UTF-8"?>
-      <InstantiateVAppTemplateParams
-         xmlns="http://www.vmware.com/vcloud/v1.5"
-         name="Linux FTP server"
-         deploy="true"
-         powerOn="true"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1">
-         <Description>Ruby VCloud RSpec Test</Description>
-         <InstantiationParams>
-            <NetworkConfigSection>
-               <ovf:Info>Configuration parameters for logical networks</ovf:Info>
-               <NetworkConfig
-                  networkName="Dev VLAN">
-                  <Configuration>
-                     <ParentNetwork
-                        href="https://some.vcloud.com/api/network/aaa-bbb-ccc-ddd-eee-fff" />
-                     <FenceMode>bridged</FenceMode>
-                  </Configuration>
-               </NetworkConfig>
-            </NetworkConfigSection>
-         </InstantiationParams>
-         <Source
-            href="https://some.vcloud.com/api/vAppTemplate/vappTemplate-aaa-bbb-ccc-ddd-eee-fff" />
-      </InstantiateVAppTemplateParams>}
+ 
       
       NETWORK_CONFIG_XML = %q{<NetworkConfig networkName="TestVappNetworkConfigNetwork">
         <Configuration>
@@ -145,12 +121,7 @@ module VCloud
       </NetworkConfig>
       </NetworkConfigSection>}
       
-      INSTANTIATE_VAPP_TEMPLATE_PARAMS = %q{<?xml version="1.0" encoding="UTF-8"?>
-      <InstantiateVAppTemplateParams xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" name="SomeVAppTemplateParams" deploy="true" powerOn="false">
-        <Description>some descriptive string</Description>
-        <InstantiationParams/>
-        <Source href=""/>
-      </InstantiateVAppTemplateParams>}
+
     end
   end
 end
