@@ -5,7 +5,7 @@ include WebMock::API
 describe VCloud::CatalogItem do
   describe "when parsing #from_xml" do
     before(:each) do
-      @item = VCloud.CatalogItem.from_xml(fixture_file('catalog_item.xml'))
+      @item = VCloud::CatalogItem.from_xml(fixture_file('catalog_item.xml'))
     end    
         
     it 'should have correct values' do
