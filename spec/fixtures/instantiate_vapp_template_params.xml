@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InstantiateVAppTemplateParams xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" name="SomeVAppTemplateParams" deploy="true" powerOn="false">
+	<Description>some descriptive string</Description>
+	<InstantiationParams>
+		<NetworkConfigSection>
+		</NetworkConfigSection>
+	</InstantiationParams>
+	<Source href="https://vcloud.example.com/api/vAppTemplate/vappTemplate-111" />
+	<IsSourceDelete>false</IsSourceDelete>
+	<AllEULAsAccepted>true</AllEULAsAccepted>
+</InstantiateVAppTemplateParams>
