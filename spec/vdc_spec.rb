@@ -54,11 +54,11 @@ describe VCloud::Vdc do
   
   it "should #instantiate_vapp_template" do    
     net_section = VCloud::NetworkConfigSection.new
-    net_config = VCloud::VAppNetworkConfig.new
+    net_config = VCloud::NetworkConfig.new
     net_config.network_name = "TestVappNetworkConfigNetwork"
-    net_config.parent_network_ref = VCloud::Reference.new({})
+    net_config.parent_network_reference = VCloud::Reference.new({})
     net_config.fence_mode = 'bridged'
-    net_section.network_configurations << net_config
+    net_section.network_configs << net_config
 
     vapp_params = VCloud::InstantiateVAppTemplateParams.new
     vapp_params.name = 'SomeVAppTemplateParams'

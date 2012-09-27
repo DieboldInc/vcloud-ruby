@@ -17,21 +17,3 @@ end
 def fixture_file(filename)
   File.read(File.dirname(__FILE__) + "/fixtures/#{filename}")
 end
-
-module VCloud
-  module Test
-    module Data
-      
-      NETWORK_CONFIG_XML = %q{<NetworkConfig networkName="TestVappNetworkConfigNetwork">
-        <Configuration>
-          <ParentNetwork href=""/>
-          <FenceMode>bridged</FenceMode>
-        </Configuration>
-      </NetworkConfig>}
-      
-
-      
-
-    end
-  end
-end
