@@ -5,7 +5,7 @@ module VCloud
     register_namespace 'xmlns', VCloud::Constants::NameSpace::V1_5
     tag 'InstantiateVAppTemplateParams'
     attribute :name, String
-    attribute :deploy, Boolean, :state_when_nil => true
+    attribute :deploy, Boolean
     attribute :power_on, Boolean, :tag => 'powerOn'
     element :description, String, :tag => 'Description'
     wrap 'InstantiationParams' do
