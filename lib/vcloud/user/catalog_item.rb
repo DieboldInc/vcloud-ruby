@@ -1,6 +1,5 @@
 module VCloud
   class CatalogItem < BaseVCloudEntity
-    include ParsesXml
     
     has_type VCloud::Constants::ContentType::CATALOG_ITEM
     tag 'CatalogItem'
