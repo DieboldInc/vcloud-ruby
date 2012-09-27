@@ -1,0 +1,6 @@
+<NetworkConfig networkName="TestVappNetworkConfigNetwork">
+  <Configuration>
+    <ParentNetwork href="http://parentnetwork.com"/>
+    <FenceMode>bridged</FenceMode>
+  </Configuration>
+</NetworkConfig>
