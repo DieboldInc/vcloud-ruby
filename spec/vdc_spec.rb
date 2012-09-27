@@ -13,14 +13,29 @@ describe VCloud::Vdc do
       @vdc.id.should == 'urn:vcloud:vdc:aaa-bbb-ccc-ddd-eee-fff'
       @vdc.type.should == 'application/vnd.vmware.vcloud.vdc+xml'
       @vdc.href.should == 'https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff'
-      @vdc.links.should have(10).items
-      @vdc.network_references.should have(1).items
     end
     
-    it "should parese a network references" do  
+    it 'should parese a network references' do  
+      @vdc.network_references.should_not be_nil
       @vdc.network_references.should have(1).items
       @vdc.network_references.first.name.should == "Dev VLAN"
       @vdc.network_references.first.href.should == "https://some.vcloud.com/api/network/aaa-bbb-ccc-ddd-eee-fff"
+    end
+    
+    it 'should parse links' do
+      @vdc.links.should_not be_nil
+      @vdc.links.should have(10).items
+      @vdc.links.first.type.should == 'application/vnd.vmware.vcloud.org+xml'
+      @vdc.links.first.href.should == 'https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff'
+    end
+    
+    it 'should #get_network_refs_by_name' do
+      refs_by_name = @vdc.get_network_refs_by_name
+      refs_by_name.should have(1).items
+      
+      refs_by_name['Dev VLAN'].type.should == 'application/vnd.vmware.vcloud.network+xml'
+      refs_by_name['Dev VLAN'].name.should == 'Dev VLAN'
+      refs_by_name['Dev VLAN'].href.should == 'https://some.vcloud.com/api/network/aaa-bbb-ccc-ddd-eee-fff'
     end
   end
   
