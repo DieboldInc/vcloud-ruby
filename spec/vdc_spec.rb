@@ -63,8 +63,8 @@ describe VCloud::Vdc do
     vapp_params = VCloud::InstantiateVAppTemplateParams.new
     vapp_params.name = 'SomeVAppTemplateParams'
     vapp_params.description = 'some descriptive string'
-    vapp_params.source = VCloud::Reference.new({})
-    vapp_params.instantiation_param_items << net_section
+    vapp_params.source_reference = VCloud::Reference.new({})
+    vapp_params.network_config_section = net_section
     
     stub_request(:post, 'https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff/action/instantiateVAppTemplate').
       with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'Content-Type'=>'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml', 'X-Vcloud-Authorization'=>'abc123xyz'}).
