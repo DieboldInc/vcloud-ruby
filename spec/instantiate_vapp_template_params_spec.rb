@@ -3,37 +3,58 @@ require 'spec_helper'
 include WebMock::API
 
 describe VCloud::InstantiateVAppTemplateParams do
-  
-  before(:each) do
-    
+   
+  it 'should #initialize' do
+    params = VCloud::InstantiateVAppTemplateParams.new
+    params.name.should == ''
+    params.deploy.should == true
+    params.power_on.should == false
+    params.description.should == ''
+    params.network_config_section.should be_nil
+    params.source_reference.should be_nil
+    params.is_source_delete.should == false
+    params.all_eulas_accepted.should == false
   end
   
-  it "creates a new InstantiateVAppTemplateParams" do
-    vapp_params = VCloud::InstantiateVAppTemplateParams.new
-    vapp_params.name = 'SomeVAppTemplateParams'
-    vapp_params.description = 'some descriptive string'
-    vapp_params.source = VCloud::Reference.new({})
+  describe 'when parsing xml #from_xml' do
+    before(:each) do
+      @params = VCloud::InstantiateVAppTemplateParams.from_xml(fixture_file('instantiate_vapp_template_params.xml'))
+    end
     
-    vapp_params.should_not == nil
-    vapp_params.name.should == "SomeVAppTemplateParams"
-    vapp_params.description.should == "some descriptive string"
-    vapp_params.source.should_not == nil
-    vapp_params.instantiation_param_items.should have(0).items
-    vapp_params.deploy.should == true
-    vapp_params.power_on.should == false    
+    it 'should have correct values' do
+      @params.name.should == 'SomeVAppTemplateParams'
+      @params.deploy.should == true
+      @params.power_on.should == false
+      @params.description.should == 'some descriptive string'
+      @params.network_config_section.should_not be_nil
+      @params.source_reference.href.should == 'https://vcloud.example.com/api/vAppTemplate/vappTemplate-111'
+      @params.is_source_delete.should == false
+      @params.all_eulas_accepted.should == true
+    end    
   end
-  
-  it "seralizes to XML" do
-    vapp_params = VCloud::InstantiateVAppTemplateParams.new
-    vapp_params.name = 'SomeVAppTemplateParams'
-    vapp_params.description = 'some descriptive string'
-    vapp_params.source = VCloud::Reference.new({})
-    
-    xml = vapp_params.to_xml
+
+
+  it "should serialize #to_xml" do
+    params = VCloud::InstantiateVAppTemplateParams.new
+    params.name = 'SomeVAppTemplateParams'
+    params.deploy = false
+    params.power_on = true
+    params.description = 'some descriptive string'
+    params.network_config_section = 'blagow'
+    params.source_reference =  VCloud::Reference.new :href => 'https://vcloud.example.com/api/vAppTemplate/vappTemplate-111'
+    params.is_source_delete = true
+    params.all_eulas_accepted = true    
+
+    xml = params.to_xml
     doc = Nokogiri::XML(xml)
-    
-    doc.at_xpath('/xmlns:InstantiateVAppTemplateParams')['name'].should == "SomeVAppTemplateParams"
-    doc.at_xpath('/xmlns:InstantiateVAppTemplateParams')['deploy'].should == "true"
-    doc.at_xpath('/xmlns:InstantiateVAppTemplateParams/xmlns:Description').text.should == "some descriptive string"
-  end
+
+    doc.xpath('/xmlns:InstantiateVAppTemplateParams/@name').text.should == "SomeVAppTemplateParams"
+    doc.xpath('/xmlns:InstantiateVAppTemplateParams/@deploy').text.should == "false"
+    doc.xpath('/xmlns:InstantiateVAppTemplateParams/@powerOn').text.should == 'true'
+    doc.xpath('/xmlns:InstantiateVAppTemplateParams/xmlns:Description').text.should == 'some descriptive string'
+    doc.xpath('/xmlns:InstantiateVAppTemplateParams/xmlns:InstantiationParams/xmlns:NetworkConfigSection').text.should == 'blagow'
+    doc.xpath('/xmlns:InstantiateVAppTemplateParams/xmlns:Source/@href').text.should == 'https://vcloud.example.com/api/vAppTemplate/vappTemplate-111'
+    doc.xpath('/xmlns:InstantiateVAppTemplateParams/xmlns:IsSourceDelete').text.should == 'true'
+    doc.xpath('/xmlns:InstantiateVAppTemplateParams/xmlns:AllEULAsAccepted').text.should == 'true'
+  end   
 end
