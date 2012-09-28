@@ -5,6 +5,7 @@ module VCloud
     def self.inherited(base)
       base.class_variable_set(:@@initialize_args, Set.new)
       base.send(:include, ParsesXml)
+      base.class_eval { attr_accessor :session }
     end
             
     def initialize(params = {})
@@ -18,9 +19,9 @@ module VCloud
       self.class_variable_get(:@@content_type)
     end
 
-    def self.from_reference(ref, session = VCloud::Session.current_session)
-      obj = new({:href => ref.href})
-      obj.refresh(session) 
+    def self.from_reference(ref, session)
+      obj = new(:href => ref.href, :session => session)
+      obj.refresh 
       obj
     end
     

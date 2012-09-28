@@ -1,8 +1,7 @@
 module VCloud
   module RestApi
-    include Session
-    
-    def refresh (session = current_session)
+
+    def refresh(session = self.session)
       #TODO: verify_ssl proper for prod
       request = RestClient::Request.new(
         :url => @href,
@@ -23,7 +22,7 @@ module VCloud
     def delete      
     end
     
-    def post (url, payload, content_type, session = current_session)
+    def post (url, payload, content_type, session = self.session)
       #TODO: verify_ssl proper for prod
       request = RestClient::Request.new(
         :url => url,

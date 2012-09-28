@@ -14,10 +14,10 @@ module VCloud
       Hash[catalog_item_references.collect{ |i| [i.name, i] }]
     end
     
-    def get_catalog_item_from_name(name)
+    def get_catalog_item_from_name(name, session = self.session)
       catalog_items = get_catalog_item_refs_by_name
       item = catalog_items[name] or return nil
-      CatalogItem.from_reference(item)
+      CatalogItem.from_reference(item, session)
     end
   end
 end
