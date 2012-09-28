@@ -10,7 +10,6 @@ RSpec.configure do |config|
              
     @session = VCloud::Client.new('https://some.vcloud.com/api/', '1.5')
     @session.login('someuser@someorg', 'password')
-    VCloud::Session.set_session(@session)
   }
 end
 

@@ -28,9 +28,9 @@ describe VCloud::Catalog do
   
   it 'should #get_catalog_item_from_name if name exists' do
     ref = @catalog.get_catalog_item_refs_by_name()['Ubuntu 10.04.4 LTS']
-    VCloud::CatalogItem.should_receive(:from_reference).with(ref).and_return('not nil')
-    
-    item = @catalog.get_catalog_item_from_name('Ubuntu 10.04.4 LTS')
+    VCloud::CatalogItem.should_receive(:from_reference).with(ref, @session).and_return('not nil')
+
+    item = @catalog.get_catalog_item_from_name('Ubuntu 10.04.4 LTS', @session)
     
     item.should_not be_nil
   end

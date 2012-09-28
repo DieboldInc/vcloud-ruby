@@ -70,7 +70,7 @@ describe VCloud::Vdc do
       with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'Content-Type'=>'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml', 'X-Vcloud-Authorization'=>'abc123xyz'}).
       to_return(:status => 200, :body => fixture_file('vapp.xml'))
     
-    vapp = @vdc.instantiate_vapp_template(vapp_params)
+    vapp = @vdc.instantiate_vapp_template(vapp_params, @session)
     
     WebMock.should have_requested(:post, 'https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff/action/instantiateVAppTemplate').
       with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'Content-Type'=>'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml', 'X-Vcloud-Authorization'=>'abc123xyz'})
