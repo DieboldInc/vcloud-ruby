@@ -50,9 +50,9 @@ describe VCloud::Org do
   
   it 'should #get_catalog_from_name if name exists' do
     link = @org.get_catalog_links_by_name['SuperCool Catalog']
-    VCloud::Catalog.should_receive(:from_reference).with(link).and_return('not nil')
+    VCloud::Catalog.should_receive(:from_reference).with(link, @session).and_return('not nil')
     
-    catalog = @org.get_catalog_from_name('SuperCool Catalog')
+    catalog = @org.get_catalog_from_name('SuperCool Catalog', @session)
     
     catalog.should_not be_nil
   end
@@ -65,9 +65,9 @@ describe VCloud::Org do
   
   it 'should #get_vdc_from_name if name exists' do
     link = @org.get_vdc_links_by_name['SomeVDC']
-    VCloud::Vdc.should_receive(:from_reference).with(link).and_return('not nil')
+    VCloud::Vdc.should_receive(:from_reference).with(link, @session).and_return('not nil')
     
-    vdc = @org.get_vdc_from_name('SomeVDC')
+    vdc = @org.get_vdc_from_name('SomeVDC', @session)
     
     vdc.should_not be_nil
   end

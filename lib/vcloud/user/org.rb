@@ -24,7 +24,7 @@ module VCloud
       Hash[catalog_links.collect { |l| [l.name, l] }]
     end
     
-    def get_catalog_from_name(name)
+    def get_catalog_from_name(name, session = self.session)
       catalogs = get_catalog_links_by_name
       link = catalogs[name] or return nil
       Catalog.from_reference(link, session)
@@ -34,7 +34,7 @@ module VCloud
       Hash[vdc_links.collect { |l| [l.name, l] }]
     end
     
-    def get_vdc_from_name(name)
+    def get_vdc_from_name(name, session = self.session)
       links = get_vdc_links_by_name
       link = links[name] or return nil
       Vdc.from_reference(link, session)
