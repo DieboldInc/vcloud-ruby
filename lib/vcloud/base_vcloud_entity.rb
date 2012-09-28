@@ -20,7 +20,7 @@ module VCloud
 
     def self.from_reference(ref, session = VCloud::Session.current_session)
       obj = new({:href => ref.href})
-      obj.refresh 
+      obj.refresh(session) 
       obj
     end
     
