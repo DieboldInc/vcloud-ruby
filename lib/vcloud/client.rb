@@ -22,7 +22,7 @@ module VCloud
       @logged_in = false
     end
 
-    def set_as_default_session
+    def set_as_default
       VCloud::Session.set_session(self)
     end
 
@@ -53,7 +53,7 @@ module VCloud
     end
   
     def get_org_refs()
-      OrgList.from_reference(get_orglist_link).orgs
+      OrgList.from_reference(get_orglist_link, self).orgs
     end
   
     def get_org_from_name(name)
