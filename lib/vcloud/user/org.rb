@@ -27,7 +27,7 @@ module VCloud
     def get_catalog_from_name(name)
       catalogs = get_catalog_links_by_name
       link = catalogs[name] or return nil
-      Catalog.from_reference(link)
+      Catalog.from_reference(link, session)
     end
     
     def get_vdc_links_by_name
@@ -37,7 +37,7 @@ module VCloud
     def get_vdc_from_name(name)
       links = get_vdc_links_by_name
       link = links[name] or return nil
-      Vdc.from_reference(link)
+      Vdc.from_reference(link, session)
     end    
   end
 end
