@@ -1,4 +1,5 @@
 module VCloud
+  # A vApp is a collection of VMs, network config, etc.
   class VApp < BaseVCloudEntity
     include ParsesXml
 
