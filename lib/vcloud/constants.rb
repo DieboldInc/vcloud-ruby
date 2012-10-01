@@ -22,6 +22,7 @@ module VCloud
       INSTANTIATE_VAPP_TEMPLATE_PARAMS = 'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml'
       VAPP = 'application/vnd.vmware.vcloud.vApp+xml'
       TASK = 'application/vnd.vmware.vcloud.task+xml'
+      UNDEPLOY_VAPP_PARAMS = 'application/vnd.vmware.vcloud.undeployVAppParams+xml'
     end
   
     module NameSpace

@@ -5,6 +5,15 @@
 <Link rel="up" type="application/vnd.vmware.vcloud.vdc+xml" href="https://some.vcloud.com/api/vdc/aaa-bbb-ccc-ddd-eee-fff"/>
 <Link rel="down" type="application/vnd.vmware.vcloud.owner+xml" href="https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff/owner"/>
 <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml" href="https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff/metadata"/>
+<Link rel="deploy" type="application/vnd.vmware.vcloud.deployVAppParams+xml" href="https://vcloud.diebold.dev/api/vApp/vapp/action/deploy"/>
+<Link rel="undeploy" type="application/vnd.vmware.vcloud.undeployVAppParams+xml" href="https://vcloud.diebold.dev/api/vApp/vapp-1/action/undeploy"/>
+<Link rel="power:powerOn" href="https://vcloud.diebold.dev/api/vApp/vapp-1/power/action/powerOn"/>
+<Link rel="power:powerOff" href="https://vcloud.diebold.dev/api/vApp/vapp-1/power/action/powerOff"/>
+<Link rel="power:reboot" href="https://vcloud.diebold.dev/api/vApp/vapp-1/power/action/reboot"/>
+<Link rel="power:reset" href="https://vcloud.diebold.dev/api/vApp/vapp-1/power/action/reset"/>
+<Link rel="power:shutdown" href="https://vcloud.diebold.dev/api/vApp/vapp-1/power/action/shutdown"/>
+<Link rel="power:suspend" href="https://vcloud.diebold.dev/api/vApp/vapp-1/power/action/suspend"/>
+<Link rel="remove" href="https://vcloud.diebold.dev/api/vApp/vapp-1"/>
 <Description>Ruby VCloud RSpec Test</Description>
 <Tasks>
   <Task status="running" startTime="2012-09-20T10:40:08.286-04:00" operationName="vdcInstantiateVapp" operation="Creating Virtual Application Linux FTP server(aaa-bbb-ccc-ddd-eee-fff)" expiryTime="2012-12-19T10:40:08.286-05:00" name="task" id="urn:vcloud:task:aaa-bbb-ccc-ddd-eee-fff" type="application/vnd.vmware.vcloud.task+xml" href="https://some.vcloud.com/api/task/aaa-bbb-ccc-ddd-eee-fff">
