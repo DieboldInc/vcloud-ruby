@@ -1,6 +1,7 @@
 module VCloud
+  
+  # A CatalogItem references an entity in the Org's Catalog
   class CatalogItem < BaseVCloudEntity
-    
     has_type VCloud::Constants::ContentType::CATALOG_ITEM
     tag 'CatalogItem'
     has_default_attributes
