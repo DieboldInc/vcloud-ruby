@@ -15,7 +15,9 @@ module VCloud
     def instantiate_vapp_template(instantiate_vapp_template_params, session = self.session)
       url = @links.select{ |l| l.type == VCloud::Constants::ContentType::INSTANTIATE_VAPP_TEMPLATE_PARAMS }.first.href
       response = post(url, instantiate_vapp_template_params.to_xml, VCloud::Constants::ContentType::INSTANTIATE_VAPP_TEMPLATE_PARAMS, session)
-      return VCloud::VApp.parse(response)
+      vapp = VCloud::VApp.new :session => session      
+      vapp.parse_xml(response)
+      vapp
     end
   end
 end
