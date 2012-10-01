@@ -9,4 +9,6 @@ group :test do
   gem 'rspec', '2.11.0'
   gem 'rspec-mocks', '2.11.3'
   gem 'webmock', '1.8.10'
+  gem 'yard', '0.8.2.1'
+  gem 'redcarpet', '2.1.1'
 end
