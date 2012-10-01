@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem 'rest-client', '1.6.7'
-gem 'nokogiri-happymapper', :git => 'https://github.com/DieboldInc/happymapper.git', :branch => 'booleanfix'
+gem 'nokogiri-happymapper', '0.5.5'
 
 gem 'rake', '0.9.2.2', :group => [:development, :test]
 
