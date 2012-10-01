@@ -19,7 +19,20 @@ module VCloud
     def update
     end
     
-    def delete      
+    def delete(url, payload, content_type, session = self.session)
+      #TODO: verify_ssl proper for prod
+      request = RestClient::Request.new(
+        :url => url,
+        :method => 'delete',
+        :payload => payload,
+        :verify_ssl => false,
+        :headers => session.token.merge({
+          :accept => VCloud::Constants::ACCEPT_HEADER+";version=#{session.api_version}",
+          :content_type => content_type})
+      )
+
+      response = request.execute
+      return response.body      
     end
     
     def post (url, payload, content_type, session = self.session)
@@ -35,10 +48,9 @@ module VCloud
       )
 
       response = request.execute
-      return response
-      #parse_response(response)
-    end
-    
+      return response.body
+    end    
+       
     #override to provide custom parsing
     def parse_response(response)
       parse_xml(response.body)
