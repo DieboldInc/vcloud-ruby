@@ -1,36 +1,41 @@
 module VCloud
   class Task < BaseVCloudEntity
-    include ParsesXml
+    require 'timeout'
     
+    include ParsesXml
+
     has_type VCloud::Constants::ContentType::TASK
     tag 'Task'
     has_links
     has_default_attributes
-    attribute :status, String
-    attribute :start_time, String, :tag => 'startTime' 
-    attribute :operation_name, String, :tag => 'operationName'
-    attribute :operation, String
-    attribute :expiry_time, String, :tag => 'expiryTime'
+    attribute :status,          String
+    attribute :start_time,      String, :tag => 'startTime' 
+    attribute :operation_name,  String, :tag => 'operationName'
+    attribute :operation,       String
+    attribute :expiry_time,     String, :tag => 'expiryTime'
 
-    def self.from_xml(xml)
-      # doc = XmlSimple.xml_in(xml)
-      # 
-      # links = []
-      # doc['Link'].each do |link|
-      #   links << VCloud::Link.new(rel: link['rel'], href: link['href'])
-      # end
-      # 
-      # new(
-      #   status: doc['status'],
-      #   start_time: doc['startTime'],
-      #   operation_name: doc['operationName'],
-      #   operation: doc['operation'],
-      #   expiry_time: doc['expiryTime'],
-      #   name: doc['name'],
-      #   id: doc['id'],
-      #   href: doc['href'],
-      #   links: links
-      # ) 
+    def wait_to_finish(timeout = 60 * 10) 
+      first_run = true
+      Timeout::timeout(timeout) do        
+        until @@completed_statuses.include?(self.status)
+          sleep 3 if not first_run
+          refresh    
+          first_run = false
+        end
+      end
+      yield(self) if block_given?
     end
+
+    module Status
+      QUEUED      = 'queued'
+      PRE_RUNNING = 'preRunning'
+      RUNNING     = 'running'
+      SUCCESS     = 'success'
+      ERROR       = 'error'
+      CANCELED    = 'canceled'
+      ABORTED     = 'aborted'    
+    end
+    @@completed_statuses = [Status::SUCCESS, Status::ERROR, Status::CANCELED, Status::ABORTED]
+    
   end
 end

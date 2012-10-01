@@ -1,0 +1,6 @@
+<Task xmlns="http://www.vmware.com/vcloud/v1.5" status="running" startTime="2012-10-01T15:31:10.175-04:00" operationName="vappUndeployPowerOff" operation="Stopping Virtual Application (6e2ec079-c533-4d99-8f29-2a90ba18da87)" expiryTime="2012-12-30T15:31:10.175-05:00" name="task" id="urn:vcloud:task:5acdbbab-0496-4a57-bf81-cec0be0ae8fb" type="application/vnd.vmware.vcloud.task+xml" href="https://vcloud.com/api/task/5acdbbab-0496-4a57-bf81-cec0be0ae8fb" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://10.9.225.10/api/v1.5/schema/master.xsd">
+    <Link rel="task:cancel" href="https://vcloud.diebold.dev/api/task/5acdbbab-0496-4a57-bf81-cec0be0ae8fb/action/cancel"/>
+    <Owner type="application/vnd.vmware.vcloud.vApp+xml" name="" href="https://vcloud.diebold.dev/api/vApp/vapp-6e2ec079-c533-4d99-8f29-2a90ba18da87"/>
+    <User type="application/vnd.vmware.admin.user+xml" name="test" href="https://vcloud.diebold.dev/api/admin/user/5d41dbbb-3fa6-4150-8cf2-4ba41752dbf8"/>
+    <Organization type="application/vnd.vmware.vcloud.org+xml" name="emtech" href="https://vcloud.diebold.dev/api/org/e5c140c9-77ca-49f0-8215-43ccfa16a9b3"/>
+</Task>
