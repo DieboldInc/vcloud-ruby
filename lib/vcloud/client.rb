@@ -13,6 +13,8 @@ module VCloud
     
     LOGIN = 'login'
     SESSION = 'sessions'
+    LOGOUT_SESSION = 'session'
+    LOGOUT_HTTP_RESPONSE = 204
     TOKEN = 'x_vcloud_authorization'.to_sym
 
     attr_reader :api_version, :url, :token
@@ -77,6 +79,25 @@ module VCloud
     
     def logged_in?
       @logged_in
+    end
+    
+    # Destroy the current session
+    #
+    # @return [Boolean] True if the session was destroyed, false if it could not be destroyed or a session does not exist
+    def logout
+      return false if not logged_in?
+      
+      url = @api_version > VCloud::Constants::Version::V0_9 ? @url + LOGOUT_SESSION : @url + LOGIN
+
+      #TODO: verify_ssl proper for prod
+      request = RestClient::Request.new(
+        :url => url,
+        :method => 'delete',
+        :verify_ssl => false,
+        :headers => token)
+      
+      response = request.execute      
+      response.code == LOGOUT_HTTP_RESPONSE ? true : false
     end
   end
 end
