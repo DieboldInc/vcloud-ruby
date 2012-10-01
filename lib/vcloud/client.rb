@@ -19,6 +19,10 @@ module VCloud
 
     attr_reader :api_version, :url, :token
 
+    # Create a new client
+    #
+    # @param [String] url API endpoint URL
+    # @param [VCloud::Constants::Version] api_version API version
     def initialize(url, api_version) 
       @links=[]
       @url = url
