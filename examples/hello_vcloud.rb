@@ -118,6 +118,12 @@ if @vapp.tasks.count > 0
 end                                     
 puts "Deployed."
 
+puts
+puts "###############################################"
+puts "7. Operate the vApp"
+puts "###############################################"
+puts
+
 print "Powering on vapp #{@vapp.name}..."
 @vapp.power_on.wait_to_finish { @vapp.refresh }
 puts 'Powered on.'
@@ -129,12 +135,6 @@ puts "Suspended."
 print "Powering on vapp #{@vapp.name}..."
 @vapp.power_on.wait_to_finish { @vapp.refresh }
 puts 'Powered on.'
-
-puts
-puts "###############################################"
-puts "7. Get Information About a vApp"
-puts "###############################################"
-puts      
 
 puts
 puts "###############################################"
@@ -159,4 +159,6 @@ puts 'Removed.'
 puts
 puts "###############################################"
 puts "10. Log Out"
-puts "###############################################"
+puts "###############################################" 
+
+@session.logout
