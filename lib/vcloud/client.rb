@@ -1,4 +1,7 @@
 module VCloud
+  
+  # Handles creating and managing a system in vCloud Director.
+  
   class Client < BaseVCloudEntity    
     
     tag 'Session'
@@ -26,6 +29,11 @@ module VCloud
       VCloud::Session.set_session(self)
     end
 
+    # Create a new session and retrieves the session token
+    #
+    # @param [String] username Username to log in with
+    # @param [String] password Password to log in with
+    # @return [Boolean] True if a session token has been generated
     def login(username, password)
       return true if @logged_in
 
