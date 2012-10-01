@@ -31,10 +31,6 @@ module VCloud
       @logged_in = false
     end
 
-    def set_as_default
-      VCloud::Session.set_session(self)
-    end
-
     # Create a new session and retrieves the session token
     #
     # @param [String] username Username to log in with
