@@ -50,7 +50,7 @@ module VCloud
       response = request.execute
       return response.body
     end    
-       
+
     #override to provide custom parsing
     def parse_response(response)
       parse_xml(response.body)

@@ -1,4 +1,5 @@
 module VCloud
+  # Represents an asynchronous operation in vCloud Director
   class Task < BaseVCloudEntity
     require 'timeout'
     
@@ -36,6 +37,6 @@ module VCloud
       ABORTED     = 'aborted'    
     end
     @@completed_statuses = [Status::SUCCESS, Status::ERROR, Status::CANCELED, Status::ABORTED]
-    
+
   end
 end

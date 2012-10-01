@@ -76,6 +76,7 @@ describe VCloud::Vdc do
       with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'Accept-Encoding'=>'gzip, deflate', 'Content-Type'=>'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml', 'X-Vcloud-Authorization'=>'abc123xyz'})
   
     vapp.id.should == 'urn:vcloud:vapp:aaa-bbb-ccc-ddd-eee-fff'
+
     vapp.session.should == @session
   end
   

@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Brian McClain", "Zach Robinson"]
   gem.description   = %q{vCloud Director API Ruby Bindings}
   gem.summary       = gem.summary
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/DieboldInc/vcloud-ruby"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -15,6 +15,5 @@ Gem::Specification.new do |gem|
   gem.version       = VCloud::VERSION
   
   gem.add_dependency "rest-client"
-  gem.add_dependency 'xml-simple'
-  gem.add_dependency 'nokogiri'
+  gem.add_dependency 'nokogiri-happymapper'
 end

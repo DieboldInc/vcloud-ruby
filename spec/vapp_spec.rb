@@ -47,7 +47,7 @@ describe VCloud::VApp do
     stub_request(:get, 'https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff').
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.vApp+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'}).
       to_return(:status => 200, :body => fixture_file('vapp.xml'))
-             
+
     vapp = VCloud::VApp.from_reference(stub(:href => 'https://some.vcloud.com/api/vApp/vapp-aaa-bbb-ccc-ddd-eee-fff'), @session)
     
     vapp.name.should == "Linux FTP server"

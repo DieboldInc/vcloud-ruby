@@ -1,2 +1,5 @@
 pkg
 ignore_test
+vendor
+doc
+.yardoc
