@@ -15,6 +15,10 @@ module VCloud
     attribute :operation,       String
     attribute :expiry_time,     String, :tag => 'expiryTime'
 
+    # Wait until the status of the task is set to indicate that the task has completed
+    #
+    # @param [Integer] timeout Timeout in seconds
+    # @yield Block to run upon completion or the timeout is reached, whichever comes first
     def wait_to_finish(timeout = 60 * 10) 
       first_run = true
       Timeout::timeout(timeout) do        
@@ -27,13 +31,21 @@ module VCloud
       yield(self) if block_given?
     end
 
+    # Task status as it's being processed
     module Status
+      # The task has been queued for execution
       QUEUED      = 'queued'
+      # The task is awaiting preprocessing or administrative action
       PRE_RUNNING = 'preRunning'
+      # The task is running
       RUNNING     = 'running'
+      # The task completed with a status of success
       SUCCESS     = 'success'
+      # The task encountered an error while running
       ERROR       = 'error'
+      # The task was canceled by the owner or an administrator
       CANCELED    = 'canceled'
+      # The task was aborted by an administrative action
       ABORTED     = 'aborted'    
     end
     @@completed_statuses = [Status::SUCCESS, Status::ERROR, Status::CANCELED, Status::ABORTED]
