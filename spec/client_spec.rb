@@ -29,7 +29,7 @@ describe VCloud::Client do
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.orgList+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'}).
       to_return(:status => 200, :body => fixture_file('org_list.xml'))
 
-    org_refs = @session.get_org_refs
+    org_refs = @session.get_org_references
    
     WebMock.should have_requested(:get, "https://some.vcloud.com/api/org/").
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.orgList+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'})
@@ -44,7 +44,7 @@ describe VCloud::Client do
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.orgList+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'}).
       to_return(:status => 200, :body => fixture_file('org_list.xml'))
     
-    hash = @session.get_org_refs_by_name
+    hash = @session.get_org_references_by_name
     
     hash.should have(1).items
     hash['someorg'].should_not be_nil   

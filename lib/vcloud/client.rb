@@ -56,7 +56,7 @@ module VCloud
     #
     # @return [Hash{String => VCloud::Reference}] Reference to all Orgs the user has access to, keyed by Org name
     def get_org_references_by_name()
-      Hash[get_org_refs.collect{ |i| [i.name, i] }]
+      Hash[get_org_references.collect{ |i| [i.name, i] }]
     end
   
     # Returns an OrgList that contains all of the Orgs the user has access to
@@ -71,7 +71,7 @@ module VCloud
     # @param [String] name Org name
     # @return [VCloud::Org] Org object
     def get_org_from_name(name)
-      orgs = get_org_refs_by_name
+      orgs = get_org_references_by_name
       ref = orgs[name] or return nil
       org = Org.from_reference(ref, self)
       return org
