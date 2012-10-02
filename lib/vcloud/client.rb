@@ -63,7 +63,7 @@ module VCloud
     #
     # @return [VCloud::OrgList] OrgList that contains all of the Orgs the user has access to
     def get_org_references()
-      OrgList.from_reference(get_orglist_link, self).orgs
+      OrgList.from_reference(get_orglist_link, self).org_references
     end
     
     # Retrieves an Org, assuming the user has access to it

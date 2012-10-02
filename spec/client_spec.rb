@@ -24,7 +24,7 @@ describe VCloud::Client do
     test_session.logged_in?.should == true
   end
 
-  it "should #get_org_refs" do
+  it "should #get_org_references" do
     stub_request(:get, "https://some.vcloud.com/api/org/").
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.orgList+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'}).
       to_return(:status => 200, :body => fixture_file('org_list.xml'))
@@ -39,7 +39,7 @@ describe VCloud::Client do
     org_refs.first.href.should == "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff"    
   end
   
-  it "should #get_org_refs_by_name" do 
+  it "should #get_org_references_by_name" do 
     stub_request(:get, "https://some.vcloud.com/api/org/").
       with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.orgList+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'}).
       to_return(:status => 200, :body => fixture_file('org_list.xml'))
