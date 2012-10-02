@@ -1,4 +1,5 @@
 module VCloud
+  # Base class for all vCloud entities (Org, CatalogItem, vApp, etc.)
   class BaseVCloudEntity  
     include RestApi
 
@@ -19,6 +20,11 @@ module VCloud
       self.class_variable_get(:@@content_type)
     end
 
+    # Retrieve an entity from a VCloud::Reference
+    #
+    # @param [VCloud::Reference] ref Reference to retrieve the entity with
+    # @param [VCloud::Client] session Session to authenticate with when retrieving the entity
+    # @param [VCloud::BaseVCloudEntity] Entity from vCloud Director
     def self.from_reference(ref, session)
       obj = new(:href => ref.href, :session => session)
       obj.refresh 
