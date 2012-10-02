@@ -7,10 +7,10 @@ module VCloud
     register_namespace 'ovf', VCloud::Constants::NameSpace::OVF
 
     tag 'NetworkConfigSection'
-    attribute :href, String
-    attribute :type, String
-    element :info, String, :tag => 'Info', :namespace => 'ovf'
-    has_many :network_configs, 'VCloud::NetworkConfig', :tag => 'NetworkConfig'
+    attribute :href,            String
+    attribute :type,            String
+    element   :info,            String,                   :tag => 'Info', :namespace => 'ovf'
+    has_many  :network_configs, 'VCloud::NetworkConfig',  :tag => 'NetworkConfig'
     
     def initialize
       @info = 'Configuration parameters for logical networks'
