@@ -28,14 +28,23 @@ module VCloud
     end    
 
     def http_request(http_opts)
-      begin
-        request = RestClient::Request.new(http_opts)    
-        response = request.execute
-      rescue => e
-        puts e.inspect
-        raise e
-      end            
-      response.body
+      request = RestClient::Request.new(http_opts)    
+      response = request.execute { |response, request|
+        case response.code
+        when 200..204 then
+          return response.body
+        when 303 then
+          return response.body
+        when 400..405 then
+          raise Exception
+        when 500..503 then
+          raise Exception
+        else
+          raise Exception
+        end
+      }
+         
+      response.nil? ? '' : response.body
     end
    
     def build_generic_http_opts(url, payload, content_type, session, opts)
