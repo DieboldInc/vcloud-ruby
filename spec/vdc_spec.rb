@@ -29,7 +29,7 @@ describe VCloud::Vdc do
       @vdc.links.first.href.should == 'https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff'
     end
     
-    it 'should #get_network_refs_by_name' do
+    it 'should #get_network_references_by_name' do
       refs_by_name = @vdc.get_network_references_by_name
       refs_by_name.should have(1).items
       
