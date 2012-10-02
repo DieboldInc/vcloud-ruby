@@ -20,7 +20,7 @@ puts "1. Log in and retrieve Org"
 puts "###############################################"
 puts
 
-@session = VCloud::Client.new(@url, '1.5')
+@session = VCloud::Client.new(@url, '1.5', :verify_ssl => false)
 @session.login(@username, @password)
 
 puts 'Available orgs'
