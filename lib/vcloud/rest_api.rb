@@ -4,7 +4,7 @@ module VCloud
     def refresh(session = self.session)
       http_opts = build_generic_http_opts(@href, nil, nil, session, {})
       http_opts.merge!(:method => 'get')
-      http_opts[:headers][:accept] = self.class.type
+      http_opts[:headers][:accept] = self.class.type+";version=#{session.api_version}"
       response = http_request(http_opts)
       parse_response(response)
     end
