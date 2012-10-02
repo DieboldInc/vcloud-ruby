@@ -12,7 +12,7 @@ module VCloud
     # Returns a hash of of all Network references, keyed by the name
     #
     # @return [Hash{String => VCloud::Reference}] Reference to all Networks in the vDC, keyed by name
-    def get_network_refs_by_name      
+    def get_network_references_by_name      
       Hash[@network_references.collect{ |i| [i.name, i] }]
     end
     

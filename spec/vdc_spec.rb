@@ -30,7 +30,7 @@ describe VCloud::Vdc do
     end
     
     it 'should #get_network_refs_by_name' do
-      refs_by_name = @vdc.get_network_refs_by_name
+      refs_by_name = @vdc.get_network_references_by_name
       refs_by_name.should have(1).items
       
       refs_by_name['Dev VLAN'].type.should == 'application/vnd.vmware.vcloud.network+xml'
