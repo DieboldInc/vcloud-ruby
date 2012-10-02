@@ -2,7 +2,7 @@ $:.unshift File.join( File.dirname( __FILE__ ), '..', 'lib')
 require 'vcloud'
 
 # Check for command line arguments
-if ARGV.length == 0
+if ARGV.length != 7
   puts "hello_vcloud.rb vCloudURL user@vcloud-organization password orgName vdcName ovfFileLocation catalogName"
   exit
 else
