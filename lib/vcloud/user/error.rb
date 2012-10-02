@@ -1,7 +1,8 @@
 module VCloud
   class Error
-    include HappyMapper
+    include ParsesXml
     
+    tag 'Error'
     attribute :message,                     String
     attribute :major_error_code,            Integer,  :tag => "majorErrorCode"
     attribute :minor_error_code,            String,   :tag => "minorErrorCode"
