@@ -112,7 +112,13 @@ module VCloud
         :headers => token)
       
       response = request.execute      
-      response.code == LOGOUT_HTTP_RESPONSE ? true : false
+      if response.code == LOGOUT_HTTP_RESPONSE
+        @token = nil   
+        @logged_in = false
+        return true
+      end
+      
+      return false
     end
   end
 end
