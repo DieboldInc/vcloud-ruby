@@ -25,7 +25,7 @@ module VCloud
     # @param [VCloud::Constants::Version] api_version API version
     def initialize(url, api_version, opts={}) 
       @links=[]
-      @url = url
+      @url = url.strip
       @api_version = api_version
       @token = {}
       @logged_in = false
