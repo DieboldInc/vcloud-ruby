@@ -16,7 +16,7 @@ module VCloud
     LOGOUT_HTTP_RESPONSE = 204
     TOKEN = 'x_vcloud_authorization'.to_sym
 
-    attr_reader :api_version, :url, :token
+    attr_reader :api_version, :url, :token, :logged_in
 
     # Create a new client
     #
@@ -112,7 +112,13 @@ module VCloud
         :headers => token)
       
       response = request.execute      
-      response.code == LOGOUT_HTTP_RESPONSE ? true : false
+      if response.code == LOGOUT_HTTP_RESPONSE
+        @token = nil   
+        @logged_in = false
+        return true
+      end
+      
+      return false
     end
   end
 end
