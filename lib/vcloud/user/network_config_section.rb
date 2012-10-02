@@ -1,4 +1,5 @@
 module VCloud
+  # Container for vApp networks
   class NetworkConfigSection
     include ParsesXml
   

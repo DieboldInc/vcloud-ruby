@@ -19,6 +19,10 @@ module VCloud
       @href = args[:href]
     end
 
+    # Parses XML to produce a VCloud::Link
+    #
+    # @param [String] xml XML to parse
+    # @return [VCloud::Link] Link object parsed from the XML
     def self.from_xml(xml)
       parse(xml)
     end
