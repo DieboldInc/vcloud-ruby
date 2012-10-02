@@ -25,7 +25,7 @@ puts
 
 puts 'Available orgs'
 puts '--------------'
-@session.get_org_refs.each do |org_ref|
+@session.get_org_references.each do |org_ref|
   puts org_ref.name
 end
 
@@ -33,7 +33,7 @@ end
 ## ---
 ## or get the org from a reference
 ## ---
-# org_ref_hash = @session.get_org_refs_by_name
+# org_ref_hash = @session.get_org_references_by_name
 # org_ref      = org_ref_hash[@org_name]
 # @org         = VCloud::Org.from_reference(org_ref, @session) 
 
@@ -72,7 +72,7 @@ puts
 ## ---
 ## or get the catalog_item from a reference
 ## ---                                        
-# catalog_item_ref_hash = @catalog.get_catalog_item_refs_by_name
+# catalog_item_ref_hash = @catalog.get_catalog_item_references_by_name
 # catalog_item_ref      = catalog_item_ref_hash[@catalog_item_name]
 # @catalog_item         = VCloud::CatalogItem.from_reference(catalog_item_ref, @session)    
 
