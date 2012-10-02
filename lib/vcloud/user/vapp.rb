@@ -68,7 +68,7 @@ module VCloud
         end
       end
     end
-
+ 
     def post_task(link)
       result = post(link.href, nil, VCloud::Constants::ACCEPT_HEADER)
       task = VCloud::Task.from_xml(result)
