@@ -15,6 +15,23 @@ INSTALL
 <pre>gem install vcloud-ruby</pre>
 
 
+USAGE
+-----
+
+The examples/hello_vcloud.rb file demonstrates basic usage of the gem, for example...
+
+```
+require 'vcloud'
+@session = VCloud::Client.new("https://my.vcloud.local/api/"), '1.5')
+@session.login('someuser@someorg', 'secretp@ssw0rd)
+@org = @session.get_org_from_name('myorg')
+@catalog = @org.get_catalog_from_name('TestCatalog')
+@vdc     = @org.get_vdc_from_name('TestVDC')
+@catalog_item = @catalog.get_catalog_item_from_name('TestLinuxTemplate')
+```
+
+...and so on
+
 CONTRIBUTE
 ----------
 * Fork the project
