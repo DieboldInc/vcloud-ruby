@@ -81,7 +81,7 @@ describe VCloud::Client do
     
     @session.logout
     
-    @session.logged_in.should == false
+    @session.logged_in?.should == false
     @session.token.should == nil
   end
 end
