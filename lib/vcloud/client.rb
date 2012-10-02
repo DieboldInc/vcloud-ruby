@@ -17,17 +17,20 @@ module VCloud
     TOKEN = 'x_vcloud_authorization'.to_sym
 
     attr_reader :api_version, :url, :token
+    attr_accessor :verify_ssl
 
     # Create a new client
     #
     # @param [String] url API endpoint URL
     # @param [VCloud::Constants::Version] api_version API version
-    def initialize(url, api_version) 
+    def initialize(url, api_version, opts={}) 
       @links=[]
       @url = url
       @api_version = api_version
       @token = {}
       @logged_in = false
+      
+      @verify_ssl = opts[:verify_ssl].nil? ? true : opts[:verify_ssl]
     end
 
     # Create a new session and retrieves the session token
@@ -40,16 +43,8 @@ module VCloud
 
       url = @api_version > VCloud::Constants::Version::V0_9 ? @url + SESSION : @url + LOGIN
 
-      #TODO: verify_ssl proper for prod
-      request = RestClient::Request.new(
-        :url => url,
-        :method => 'post',
-        :user => username,
-        :password => password,
-        :verify_ssl => false,
-        :headers => { :accept => VCloud::Constants::ACCEPT_HEADER+";version=#{@api_version}" })
-      response = request.execute
-      parse_xml(response.body)
+      response = post(url, nil, nil, self, :user => username, :password => password)
+      parse_xml(response)
 
       @token = { TOKEN => response.headers[TOKEN] }      
       @logged_in = true
@@ -104,21 +99,15 @@ module VCloud
       
       url = @api_version > VCloud::Constants::Version::V0_9 ? @url + LOGOUT_SESSION : @url + LOGIN
 
-      #TODO: verify_ssl proper for prod
-      request = RestClient::Request.new(
-        :url => url,
-        :method => 'delete',
-        :verify_ssl => false,
-        :headers => token)
-      
-      response = request.execute      
-      if response.code == LOGOUT_HTTP_RESPONSE
-        @token = nil   
-        @logged_in = false
-        return true
+      begin
+        delete(url, nil, nil, self)
+      rescue => e
+        return false
       end
       
-      return false
+      @token = nil   
+      @logged_in = false
+      return true
     end
   end
 end

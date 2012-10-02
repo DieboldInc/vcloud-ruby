@@ -76,7 +76,7 @@ describe VCloud::Client do
   
   it "should #logout and destroy the session" do
     stub_request(:delete, "https://some.vcloud.com/api/session").
-             with(:headers => {'Accept'=>'*/*; q=0.5, application/xml', 'X-Vcloud-Authorization'=>'abc123xyz'}).
+             with(:headers => {'Accept'=>'application/*+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'}).
              to_return(:status => 204, :body => "", :headers => {})
     
     @session.logout
