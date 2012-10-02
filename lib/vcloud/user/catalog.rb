@@ -14,7 +14,7 @@ module VCloud
     # Returns a hash of of all CatalogItem references, keyed by the CatalogItem name
     #
     # @return [Hash{String => VCloud::Reference}] Reference to all CatalogsItems in the Catalog, keyed by name
-    def get_catalog_item_refs_by_name
+    def get_catalog_item_references_by_name
       Hash[catalog_item_references.collect{ |i| [i.name, i] }]
     end
     
@@ -24,7 +24,7 @@ module VCloud
     # @param [VCloud::Client] session Session to use to retrieve the CatalogItem
     # @return [VCloud::CatalogItem] CatalogItem object
     def get_catalog_item_from_name(name, session = self.session)
-      catalog_items = get_catalog_item_refs_by_name
+      catalog_items = get_catalog_item_references_by_name
       item = catalog_items[name] or return nil
       CatalogItem.from_reference(item, session)
     end

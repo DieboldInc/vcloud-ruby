@@ -18,8 +18,8 @@ describe VCloud::Catalog do
       @catalog.is_published.should == true
     end
     
-    it 'should #get_catalog_item_refs_by_name' do
-      hash = @catalog.get_catalog_item_refs_by_name
+    it 'should #get_catalog_item_references_by_name' do
+      hash = @catalog.get_catalog_item_references_by_name
       
       hash.should have(1).items
       hash['Ubuntu 10.04.4 LTS'].href.should == 'https://some.vcloud.com/api/catalogItem/aaa-bbb-ccc-ddd-eee-fff'      
@@ -27,7 +27,7 @@ describe VCloud::Catalog do
   end  
   
   it 'should #get_catalog_item_from_name if name exists' do
-    ref = @catalog.get_catalog_item_refs_by_name()['Ubuntu 10.04.4 LTS']
+    ref = @catalog.get_catalog_item_references_by_name()['Ubuntu 10.04.4 LTS']
     VCloud::CatalogItem.should_receive(:from_reference).with(ref, @session).and_return('not nil')
 
     item = @catalog.get_catalog_item_from_name('Ubuntu 10.04.4 LTS', @session)

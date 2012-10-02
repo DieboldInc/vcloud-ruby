@@ -5,6 +5,6 @@ module VCloud
     has_type VCloud::Constants::ContentType::ORG_LIST
     has_default_attributes
     tag 'OrgList'
-    has_many :orgs, 'VCloud::Reference', :tag => 'Org'
+    has_many :org_references, 'VCloud::Reference', :tag => 'Org'
   end
 end
