@@ -13,18 +13,18 @@ module VCloud
     
     # vCloud Director MIME types
     module ContentType
-      ORG = 'application/vnd.vmware.vcloud.org+xml'
-      VDC = 'application/vnd.vmware.vcloud.vdc+xml'
-      CATALOG = 'application/vnd.vmware.vcloud.catalog+xml'
-      CATALOG_ITEM = 'application/vnd.vmware.vcloud.catalogItem+xml'
-      ORG_LIST = 'application/vnd.vmware.vcloud.orgList+xml'      
-      ORG_NETWORK = 'application/vnd.vmware.vcloud.orgNetwork+xml'
-      VAPP_TEMPLATE = 'application/vnd.vmware.vcloud.vAppTemplate+xml'
-      NETWORK_CONFIG_SECTION = 'application/vnd.vmware.vcloud.networkConfigSection+xml'
+      CATALOG                          = 'application/vnd.vmware.vcloud.catalog+xml'
+      CATALOG_ITEM                     = 'application/vnd.vmware.vcloud.catalogItem+xml'
       INSTANTIATE_VAPP_TEMPLATE_PARAMS = 'application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml'
-      VAPP = 'application/vnd.vmware.vcloud.vApp+xml'
-      TASK = 'application/vnd.vmware.vcloud.task+xml'
-      UNDEPLOY_VAPP_PARAMS = 'application/vnd.vmware.vcloud.undeployVAppParams+xml'
+      NETWORK_CONFIG_SECTION           = 'application/vnd.vmware.vcloud.networkConfigSection+xml'
+      ORG                              = 'application/vnd.vmware.vcloud.org+xml'
+      ORG_LIST                         = 'application/vnd.vmware.vcloud.orgList+xml'      
+      ORG_NETWORK                      = 'application/vnd.vmware.vcloud.orgNetwork+xml'
+      TASK                             = 'application/vnd.vmware.vcloud.task+xml'
+      UNDEPLOY_VAPP_PARAMS             = 'application/vnd.vmware.vcloud.undeployVAppParams+xml'  
+      VAPP                             = 'application/vnd.vmware.vcloud.vApp+xml'
+      VAPP_TEMPLATE                    = 'application/vnd.vmware.vcloud.vAppTemplate+xml'
+      VDC                              = 'application/vnd.vmware.vcloud.vdc+xml'
     end
     
     # vCloud Director API XML namespaces
