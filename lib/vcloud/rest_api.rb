@@ -50,7 +50,17 @@ module VCloud
             raise VCloud::VCloudException.new(error.message, error.major_error_code, error.minor_error_code, error.vendor_specific_error_code, error.stack_trace)
           end
         when 500, 501, 503 then
-          raise VCloud::VCloudException
+           if response.body.empty?
+              major_error_code = response.code
+              short_message = VCloud::Exception::HTTPMessage[response.code][:short_message]
+              long_message = VCloud::Exception::HTTPMessage[response.code][:message]          
+              message = "#{short_message} - #{long_message}"
+
+              raise VCloud::VCloudException.new(message, major_error_code)
+            else
+              error = VCloud::Error.from_xml(response.body)
+              raise VCloud::VCloudException.new(error.message, error.major_error_code, error.minor_error_code, error.vendor_specific_error_code, error.stack_trace)
+            end
         else
           raise Exception
         end
