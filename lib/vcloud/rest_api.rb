@@ -65,7 +65,10 @@ module VCloud
         end
       }
          
-      response.nil? ? '' : response.body      
+      response.nil? ? '' : response.body
+    
+    rescue OpenSSL::SSL::SSLError => err
+      raise VCloud::VCloudError.new("Failed to verify SSL certifcate at API target URL.  Either verify that the target server has a properly named SSL certificate or create the client to skip ssl verification.  Eg: session = VCloud::Client.new('https://api.vcloud.com', '1.5', :verify_ssl => false)", 'na')
     end
    
     def build_generic_http_opts(url, payload, content_type, session, opts)

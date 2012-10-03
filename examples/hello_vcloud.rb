@@ -176,7 +176,7 @@ rescue SocketError => err
   puts
   puts "#{err.class} occurred."
   puts err.message
-rescue Exception
+rescue Exception => err
   puts
   puts "#{err.class} occurred."
   puts err.message
