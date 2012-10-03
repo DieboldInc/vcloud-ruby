@@ -11,7 +11,7 @@ describe VCloud::RestApi do
                
       session = VCloud::Client.new('https://some.vcloud.com/badapiendpoint/', '1.5')             
       
-      expect { session.login('someuser@someorg', 'password') }.to raise_error(VCloud::VCloudException) { |error| 
+      expect { session.login('someuser@someorg', 'password') }.to raise_error(VCloud::VCloudError) { |error| 
         error.major_error_code.should == 404
       }
     end

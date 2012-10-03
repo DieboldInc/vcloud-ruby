@@ -4,10 +4,8 @@ module VCloud
   require 'restclient'
   require 'happymapper'
   require 'set'
-  
-  require 'vcloud/vcloud_exception'
+
   require 'vcloud/exceptions'
-                
   require 'vcloud/constants'
   require 'vcloud/parses_xml'
   require 'vcloud/rest_api'

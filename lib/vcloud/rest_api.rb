@@ -38,27 +38,34 @@ module VCloud
           # TODO: How do we handle this?
           return response.body
         when 400, 401, 403, 404, 405, 500, 501, 503 then
-          
+
+          # If there is a body, try to parse as Error xml doc and raise exception
           if not response.body.strip.empty?
             error = VCloud::Error.from_xml(response.body)
             if error.instance_of?(VCloud::Error)
-              raise VCloud::VCloudException.new(error.message, error.major_error_code, error.minor_error_code, error.vendor_specific_error_code, error.stack_trace)
+              raise VCloud::VCloudError.new(
+                error.message, 
+                error.major_error_code, 
+                error.minor_error_code, 
+                error.vendor_specific_error_code, 
+                error.stack_trace)
             end
           end
           
+          # No body was supplied or body wasn't an Error xml doc, create and raise exception
+                    
           major_error_code = response.code
           short_message = VCloud::Exception::HTTPMessage[response.code][:short_message]
-          long_message = VCloud::Exception::HTTPMessage[response.code][:message]          
-          message = "#{short_message} - #{long_message}"
+          long_message  = VCloud::Exception::HTTPMessage[response.code][:message]          
+          message       = "#{short_message} - #{long_message}"
         
-          raise VCloud::VCloudException.new(message, major_error_code)
-          
+          raise VCloud::VCloudError.new(message, major_error_code)          
         else
-          raise VCloud::VCloudException.new('An unexpected return code was received', response.code)
+          raise VCloud::VCloudError.new('An unexpected return code was received', response.code)
         end
       }
          
-      response.nil? ? '' : response.body
+      response.nil? ? '' : response.body      
     end
    
     def build_generic_http_opts(url, payload, content_type, session, opts)

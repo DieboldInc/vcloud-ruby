@@ -16,4 +16,16 @@ module VCloud
         503 => {:short_message => 'Service Unavailable', :message => 'One or more services needed to complete the request are not available on the server.'}
       }
   end
+
+  class VCloudError < StandardError
+    attr_reader :message, :major_error_code, :minor_error_code, :vendor_specific_error_code, :stack_trace
+
+    def initialize(message, major_error_code, minor_error_code = nil, vendor_specific_error_code = nil, stack_trace = nil)
+      @message                    = message
+      @major_error_code           = major_error_code
+      @minor_error_code           = minor_error_code
+      @vendor_specific_error_code = vendor_specific_error_code
+      @stack_trace                = stack_trace
+    end
+  end
 end
