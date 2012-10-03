@@ -101,8 +101,12 @@ module VCloud
 
       begin
         delete(url, nil, nil, self)
-      rescue => e
-        return false
+      rescue => error
+        if error.instance_of? VCloud::VCloudError
+          raise error
+        else
+          return false
+        end
       end
       
       @token = nil   
