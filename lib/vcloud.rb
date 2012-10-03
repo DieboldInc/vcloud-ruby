@@ -5,7 +5,7 @@ module VCloud
   require 'happymapper'
   require 'set'
 
-  require 'vcloud/exceptions'
+  require 'vcloud/errors'
   require 'vcloud/constants'
   require 'vcloud/parses_xml'
   require 'vcloud/rest_api'

@@ -1,5 +1,5 @@
 module VCloud
-  module Exception
+  module Errors
     HTTPMessage = {
         200 => {:short_message => 'OK', :message => 'The request is valid and was completed. The response includes a document body.'},
         201 => {:short_message => 'Created', :message => 'The request is valid. The requested object was created and can be found at the URL specified in the Location header.'},

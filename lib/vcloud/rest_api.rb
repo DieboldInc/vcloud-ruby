@@ -55,8 +55,8 @@ module VCloud
           # No body was supplied or body wasn't an Error xml doc, create and raise exception
                     
           major_error_code = response.code
-          short_message = VCloud::Exception::HTTPMessage[response.code][:short_message]
-          long_message  = VCloud::Exception::HTTPMessage[response.code][:message]          
+          short_message = VCloud::Errors::HTTPMessage[response.code][:short_message]
+          long_message  = VCloud::Errors::HTTPMessage[response.code][:message]          
           message       = "#{short_message} - #{long_message}"
         
           raise VCloud::VCloudError.new(message, major_error_code)          
