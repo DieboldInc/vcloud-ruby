@@ -37,8 +37,8 @@ module VCloud
           # 303 See Other, provides a Location header
           # TODO: How do we handle this?
           return response.body
-        when 400, 401, 403, 404, 405 then
-          if response.body.empty?
+        when 400, 401, 403, 404, 405, 500, 501, 503 then
+          if response.body.strip.empty?
             major_error_code = response.code
             short_message = VCloud::Exception::HTTPMessage[response.code][:short_message]
             long_message = VCloud::Exception::HTTPMessage[response.code][:message]          
@@ -49,20 +49,8 @@ module VCloud
             error = VCloud::Error.from_xml(response.body)
             raise VCloud::VCloudException.new(error.message, error.major_error_code, error.minor_error_code, error.vendor_specific_error_code, error.stack_trace)
           end
-        when 500, 501, 503 then
-           if response.body.empty?
-              major_error_code = response.code
-              short_message = VCloud::Exception::HTTPMessage[response.code][:short_message]
-              long_message = VCloud::Exception::HTTPMessage[response.code][:message]          
-              message = "#{short_message} - #{long_message}"
-
-              raise VCloud::VCloudException.new(message, major_error_code)
-            else
-              error = VCloud::Error.from_xml(response.body)
-              raise VCloud::VCloudException.new(error.message, error.major_error_code, error.minor_error_code, error.vendor_specific_error_code, error.stack_trace)
-            end
         else
-          raise Exception
+          raise VCloud::VCloudException.new('An unexpected return code was received', response.code)
         end
       }
          
