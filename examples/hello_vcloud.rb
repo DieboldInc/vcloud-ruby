@@ -15,6 +15,7 @@ else
   @catalog_name = ARGV[6]
 end
 
+begin
 puts "###############################################"
 puts "1. Log in and retrieve Org"
 puts "###############################################"
@@ -162,3 +163,21 @@ puts "10. Log Out"
 puts "###############################################" 
 
 @session.logout
+
+rescue Timeout::Error => err
+  puts
+  puts "#{err.class} occurred."
+  puts err.message
+rescue VCloud::VCloudError => err
+  puts
+  puts "#{err.class} occurred."
+  puts err.message
+rescue SocketError => err
+  puts
+  puts "#{err.class} occurred."
+  puts err.message
+rescue Exception
+  puts
+  puts "#{err.class} occurred."
+  puts err.message
+end
