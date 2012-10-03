@@ -21,7 +21,7 @@ puts "1. Log in and retrieve Org"
 puts "###############################################"
 puts
 
-@session = VCloud::Client.new(@url, '1.5', :verify_ssl => false)
+@session = VCloud::Client.new(@url, '1.5', :verify_ssl => true)
 @session.login(@username, @password)
 
 puts 'Available orgs'
@@ -176,7 +176,7 @@ rescue SocketError => err
   puts
   puts "#{err.class} occurred."
   puts err.message
-rescue Exception
+rescue Exception => err
   puts
   puts "#{err.class} occurred."
   puts err.message
