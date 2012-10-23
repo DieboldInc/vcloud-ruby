@@ -12,7 +12,7 @@ This is a work in progress, but it currently supports enough functionality to pe
 INSTALL
 -------
 
-<pre>gem install vcloud-ruby</pre>
+<pre>gem install vcloud</pre>
 
 
 USAGE
