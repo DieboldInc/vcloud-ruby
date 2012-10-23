@@ -13,7 +13,9 @@ Gem::Specification.new do |gem|
   gem.name          = "vcloud"
   gem.require_paths = ["lib"]
   gem.version       = VCloud::VERSION
-  
+
+  gem.required_ruby_version = '>= 1.9.1'
+
   gem.add_dependency "rest-client"
   gem.add_dependency 'nokogiri-happymapper'
 end
