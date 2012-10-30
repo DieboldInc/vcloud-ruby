@@ -1,3 +1,5 @@
+require 'cgi'
+
 module VCloud
   module RestApi
 
@@ -84,8 +86,15 @@ module VCloud
     
     #override to provide custom parsing
     def parse_response(response)
-      parse_xml(response.body)
+      html_unescaped = CGI.unescapeHTML(response.body)      
+      to_parse = remove_invalid_xml_chars!(html_unescaped)
+      parse_xml(to_parse)
     end
     
+    # remove any invalid XML characters as defined at http://www.w3.org/TR/2000/REC-xml-20001006#charsets    
+    def remove_invalid_xml_chars!(str)                                                                      
+      str.tr("^\u0009\u000A\u000D\u0020-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF", '')
+    end
+
   end
 end

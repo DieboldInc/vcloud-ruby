@@ -95,5 +95,18 @@ describe VCloud::Org do
     org.description.should == 'This is an example organization'
     org.full_name.should == 'Example Organization'
     org.links.should have(6).items
-  end   
+  end
+  
+  it 'should parse html escaped unicode characters' do
+    stub_request(:get, "https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff").
+      with(:headers => {'Accept'=>'application/vnd.vmware.vcloud.org+xml;version=1.5', 'X-Vcloud-Authorization'=>'abc123xyz'}).
+      to_return(:status => 200, :body => fixture_file('html_escaped_unicode.xml'),
+                :headers => { 'Content-Type' => 'text/xml; charset=utf-8' })  
+    
+    org = nil  
+    expect { org = VCloud::Org.from_reference(stub(:href => 'https://some.vcloud.com/api/org/aaa-bbb-ccc-ddd-eee-fff'), @session) }.
+      to_not raise_error
+      
+    org.should_not be_nil
+  end
 end    

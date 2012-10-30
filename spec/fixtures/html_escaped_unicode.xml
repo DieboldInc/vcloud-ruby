@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Org xmlns="http://www.vmware.com/vcloud/v1.5" name="testorg"
+id="urn:vcloud:org:9cb7efae-48d6-498e-a036-956053fca308"
+type="application/vnd.vmware.vcloud.org+xml"
+href="https://vcd/api/org/9cb7efae-48d6-498e-a036-956053fca308"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5
+http://vcd/api/v1.5/schema/master.xsd">
+    <Link rel="down" type="application/vnd.vmware.vcloud.vdc+xml" name="Sub
+vDC" href="https://vcd/api/vdc/4cd767d4-0622-43a3-95c6-5a904611fb55"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.tasksList+xml"
+href="https://vcd/api/tasksList/9cb7efae-48d6-498e-a036-956053fca308"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.catalog+xml"
+name="Test Cat"
+href="https://vcd/api/catalog/5089f14e-d176-4859-84b5-787f97627180"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.controlAccess+xml"
+href="https://vcd/api/org/9cb7efae-48d6-498e-a036-956053fca308/catalog/5089f
+14e-d176-4859-84b5-787f97627180/controlAccess/"/>
+    <Link rel="controlAccess"
+type="application/vnd.vmware.vcloud.controlAccess+xml"
+href="https://vcd/api/org/9cb7efae-48d6-498e-a036-956053fca308/catalog/5089f
+14e-d176-4859-84b5-787f97627180/action/controlAccess"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.catalog+xml"
+name="Main Catalog"
+href="https://vcd/api/catalog/fa5a7f4c-d852-4e2b-9dbe-908fa64ddc63"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.controlAccess+xml"
+href="https://vcd/api/org/9cb7efae-48d6-498e-a036-956053fca308/catalog/fa5a7
+f4c-d852-4e2b-9dbe-908fa64ddc63/controlAccess/"/>
+    <Link rel="controlAccess"
+type="application/vnd.vmware.vcloud.controlAccess+xml"
+href="https://vcd/api/org/9cb7efae-48d6-498e-a036-956053fca308/catalog/fa5a7
+f4c-d852-4e2b-9dbe-908fa64ddc63/action/controlAccess"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.orgNetwork+xml"
+name="Internal Network"
+href="https://vcd/api/network/541ec761-24ae-4662-90ed-0dbed787f846"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.orgNetwork+xml"
+name="External Network"
+href="https://vcd/api/network/e69279da-0300-4eb0-9a11-8203a60a533b"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml"
+href="https://vcd/api/org/9cb7efae-48d6-498e-a036-956053fca308/metadata"/>
+    <Description>&#22;&#3;&#22;&#26;Testb Organization&#1;</Description>
+    <FullName>&#3;&#22;&#26;Testb Organization&#1;</FullName>
+</Org>
