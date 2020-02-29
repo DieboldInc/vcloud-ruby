@@ -3,7 +3,7 @@ source "http://rubygems.org"
 gem 'rest-client', '1.6.7'
 gem 'nokogiri-happymapper', '0.5.5'
 
-gem 'rake', '0.9.2.2', :group => [:development, :test]
+gem 'rake', '12.3.3', :group => [:development, :test]
 
 group :test do
   gem 'rspec', '2.11.0'
